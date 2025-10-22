@@ -1,0 +1,133 @@
+ DBCSR| Multiplication driver                                               XSMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Multiplicative factor virtual images                                   1
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Number of 3D layers                                               SINGLE
+ DBCSR| Use MPI memory allocation                                              T
+ DBCSR| Use RMA algorithm                                                      F
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2024-07-19 11:07:24.736
+ ***** ** ***  *** **   PROGRAM STARTED ON                            sebnode131
+ **    ****   ******    PROGRAM STARTED BY                                luehrs
+ ***** **    ** ** **   PROGRAM PROCESS ID                                318565
+  **** **  *******  **  PROGRAM STARTED IN /home/luehrs/PhD/Sodium_batteries/Sod
+                                           ium-graphene-edge/Armchair_3/Hydrogen
+
+ CP2K| version string:                    CP2K version 7.0 (Development Version)
+ CP2K| source code revision number:                                             
+ CP2K| cp2kflags: libint fftw3 libxc parallel mpi3 scalapack xsmm libderiv_max_a
+ CP2K|            m1=8 libint_max_am=9 max_contr=4
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                         Sun Jun 24 14:37:16 CEST 2018
+ CP2K| Program compiled on                                            sebstorage
+ CP2K| Program compiled for                                Linux-x86-64-gfortran
+ CP2K| Data directory path    /home/brehm/Software_Batchnode/2018/Source/cp2k_18
+ CP2K| Input file name                                        input.armchair.inp
+
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                      ./BASIS_MOLOPT
+ GLOBAL| Potential file name                                    ./GTH_POTENTIALS
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name           ./graphene_armchair_hydrogen_relaxed.xyz
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                     graphene_armchair_hydrogen_sodium_BSSE
+ GLOBAL| Preferred FFT library                                             FFTW3
+ GLOBAL| Preferred diagonalization lib.                                       SL
+ GLOBAL| Run type                                                           BSSE
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Global print level                                               MEDIUM
+ GLOBAL| Total number of message passing processes                            16
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+ GLOBAL| CPU model name :  AMD EPYC 7513 32-Core Processor
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal            131901556     131901556     131901556     131901556
+ MEMORY| MemFree              91916876      91916876      91916876      91916876
+ MEMORY| Buffers                114656        114656        114656        114656
+ MEMORY| Cached               35392312      35392312      35392312      35392312
+ MEMORY| Slab                  1475952       1475952       1475952       1475952
+ MEMORY| SReclaimable           646624        646624        646624        646624
+ MEMORY| MemLikelyFree       128070468     128070468     128070468     128070468
+
+
+ *** Fundamental physical constants (SI units) ***
+
+ *** Literature: B. J. Mohr and B. N. Taylor,
+ ***             CODATA recommended values of the fundamental physical
+ ***             constants: 2006, Web Version 5.1
+ ***             http://physics.nist.gov/constants
+
+ Speed of light in vacuum [m/s]                             2.99792458000000E+08
+ Magnetic constant or permeability of vacuum [N/A**2]       1.25663706143592E-06
+ Electric constant or permittivity of vacuum [F/m]          8.85418781762039E-12
+ Planck constant (h) [J*s]                                  6.62606896000000E-34
+ Planck constant (h-bar) [J*s]                              1.05457162825177E-34
+ Elementary charge [C]                                      1.60217648700000E-19
+ Electron mass [kg]                                         9.10938215000000E-31
+ Electron g factor [ ]                                     -2.00231930436220E+00
+ Proton mass [kg]                                           1.67262163700000E-27
+ Fine-structure constant                                    7.29735253760000E-03
+ Rydberg constant [1/m]                                     1.09737315685270E+07
+ Avogadro constant [1/mol]                                  6.02214179000000E+23
+ Boltzmann constant [J/K]                                   1.38065040000000E-23
+ Atomic mass unit [kg]                                      1.66053878200000E-27
+ Bohr radius [m]                                            5.29177208590000E-11
+
+ *** Conversion factors ***
+
+ [u] -> [a.u.]                                              1.82288848426455E+03
+ [Angstrom] -> [Bohr] = [a.u.]                              1.88972613288564E+00
+ [a.u.] = [Bohr] -> [Angstrom]                              5.29177208590000E-01
+ [a.u.] -> [s]                                              2.41888432650478E-17
+ [a.u.] -> [fs]                                             2.41888432650478E-02
+ [a.u.] -> [J]                                              4.35974393937059E-18
+ [a.u.] -> [N]                                              8.23872205491840E-08
+ [a.u.] -> [K]                                              3.15774647902944E+05
+ [a.u.] -> [kJ/mol]                                         2.62549961709828E+03
+ [a.u.] -> [kcal/mol]                                       6.27509468713739E+02
+ [a.u.] -> [Pa]                                             2.94210107994716E+13
+ [a.u.] -> [bar]                                            2.94210107994716E+08
+ [a.u.] -> [atm]                                            2.90362800883016E+08
+ [a.u.] -> [eV]                                             2.72113838565563E+01
+ [a.u.] -> [Hz]                                             6.57968392072181E+15
+ [a.u.] -> [1/cm] (wave numbers)                            2.19474631370540E+05
+ [a.u./Bohr**2] -> [1/cm]                                   5.14048714338585E+03
+ 
+
+ CELL_TOP| Volume [angstrom^3]:                                        15412.800
+ CELL_TOP| Vector a [angstrom    12.844     0.000     0.000    |a| =      12.844
+ CELL_TOP| Vector b [angstrom     0.000    30.000     0.000    |b| =      30.000
+ CELL_TOP| Vector c [angstrom     0.000     0.000    40.000    |c| =      40.000
+ CELL_TOP| Angle (b,c), alpha [degree]:                                   90.000
+ CELL_TOP| Angle (a,c), beta  [degree]:                                   90.000
+ CELL_TOP| Angle (a,b), gamma [degree]:                                   90.000
+ CELL_TOP| Requested initial symmetry:                                 TRICLINIC
+ CELL_TOP| Numerically orthorhombic:                                         YES
+
+ *******************************************************************************
+ *   ___                                                                       *
+ *  /   \                                                                      *
+ * [ABORT]         An integer type object was expected, found <i>, File:       *
+ *  \___/     './graphene_armchair_hydrogen_relaxed.xyz', Line: 1, Column: ,   *
+ *    |                                 Chunk: <i>                             *
+ *  O/|                                                                        *
+ * /| |                                                                        *
+ * / \                                          input/cp_parser_methods.F:1043 *
+ *******************************************************************************
+
+
+ ===== Routine Calling Stack ===== 
+
+            5 read_coordinate_xyz
+            4 coordinate_control_READ_COORDINATE
+            3 coordinate_control
+            2 topology_control
+            1 CP2K

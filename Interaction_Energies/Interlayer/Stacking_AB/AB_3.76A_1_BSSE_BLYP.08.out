@@ -1,0 +1,19 @@
+
+ *******************************************************************************
+ *   ___                                                                       *
+ *  /   \                                                                      *
+ * [ABORT]                                                                     *
+ *  \___/                   invalid value for enumeration:BLYP                 *
+ *    |                                                                        *
+ *  O/|                                                                        *
+ * /| |                                                                        *
+ * / \                                     input/input_enumeration_types.F:215 *
+ *******************************************************************************
+
+
+ ===== Routine Calling Stack ===== 
+
+            4 val_create_parsing
+            3 section_vals_parse
+            2 section_vals_parse
+            1 read_input

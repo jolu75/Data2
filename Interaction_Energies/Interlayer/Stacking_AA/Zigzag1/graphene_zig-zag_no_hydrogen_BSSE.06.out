@@ -1,0 +1,2412 @@
+ DBCSR| Multiplication driver                                               XSMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Multiplicative factor virtual images                                   1
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Number of 3D layers                                               SINGLE
+ DBCSR| Use MPI memory allocation                                              T
+ DBCSR| Use RMA algorithm                                                      F
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2024-08-19 14:09:35.881
+ ***** ** ***  *** **   PROGRAM STARTED ON                            sebnode048
+ **    ****   ******    PROGRAM STARTED BY                                luehrs
+ ***** **    ** ** **   PROGRAM PROCESS ID                                346155
+  **** **  *******  **  PROGRAM STARTED IN /home/luehrs/PhD/Sodium_batteries/Sod
+                                           ium-graphene-interlayer/Zig_Zag_1
+
+ CP2K| version string:                    CP2K version 7.0 (Development Version)
+ CP2K| source code revision number:                                             
+ CP2K| cp2kflags: libint fftw3 libxc parallel mpi3 scalapack xsmm libderiv_max_a
+ CP2K|            m1=8 libint_max_am=9 max_contr=4
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                         Sun Jun 24 14:37:16 CEST 2018
+ CP2K| Program compiled on                                            sebstorage
+ CP2K| Program compiled for                                Linux-x86-64-gfortran
+ CP2K| Data directory path    /home/brehm/Software_Batchnode/2018/Source/cp2k_18
+ CP2K| Input file name                                         input.zig-zag.inp
+
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                      ./BASIS_MOLOPT
+ GLOBAL| Potential file name                                    ./GTH_POTENTIALS
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name           graphene_no_hydrogen_zig-zag_3.7_relaxed
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                               graphene_zig_zag_sodium_BSSE
+ GLOBAL| Preferred FFT library                                             FFTW3
+ GLOBAL| Preferred diagonalization lib.                                       SL
+ GLOBAL| Run type                                                           BSSE
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Global print level                                                  LOW
+ GLOBAL| Total number of message passing processes                            16
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+ GLOBAL| CPU model name :  Intel(R) Xeon(R) CPU E5-2630 v3 @ 2.40GHz
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal             65833008      65833008      65833008      65833008
+ MEMORY| MemFree              23640496      23640496      23640496      23640496
+ MEMORY| Buffers                209568        209568        209568        209568
+ MEMORY| Cached                1541900       1541896       1541900       1541896
+ MEMORY| Slab                   610876        610876        610876        610876
+ MEMORY| SReclaimable           323124        323124        323124        323124
+ MEMORY| MemLikelyFree        25715088      25715084      25715088      25715084
+
+
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K developers group (2000 - 2018)           **
+ **                                                                           **
+ *******************************************************************************
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   2
+                             - Atoms:                                        225
+                             - Shell sets:                                   225
+                             - Shells:                                      1125
+                             - Primitive Cartesian functions:               1127
+                             - Cartesian basis functions:                   3145
+                             - Spherical basis functions:                   2921
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          2
+                             - Non-local part of the GTH pseudopotential:      1
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        3.00E-07
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       100  100
+                        --------------------------------------------------------
+                        Mixing method:                            BROYDEN_MIXING
+                                                charge density mixing in g-space
+                        --------------------------------------------------------
+                        Smear method:                                FERMI_DIRAC
+                        Electronic temperature [K]:                        300.0
+                        Electronic temperature [a.u.]:                  9.50E-04
+                        Accuracy threshold:                             1.00E-10
+                        --------------------------------------------------------
+                        Outer loop SCF in use 
+                        No variables optimised in outer loop
+                        eps_scf                                         1.00E-06
+                        max_scf                                               30
+                        DIIS optimization
+                        DIIS buffer length                                     3
+                        step_size                                       5.00E-01
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -  BSSE CALCULATION         FRAGMENT CONF: 10        FRAGMENT SUBCONF: 10     -
+ -                           CHARGE =     0           MULTIPLICITY =     0     -
+ -                                                                             -
+ -                 ATOM INDEX                              ATOM NAME           -
+ -                 ----------                              ---------           -
+ -                      1                                   C                  -
+ -                      2                                   C                  -
+ -                      3                                   C                  -
+ -                      4                                   C                  -
+ -                      5                                   C                  -
+ -                      6                                   C                  -
+ -                      7                                   C                  -
+ -                      8                                   C                  -
+ -                      9                                   C                  -
+ -                     10                                   C                  -
+ -                     11                                   C                  -
+ -                     12                                   C                  -
+ -                     13                                   C                  -
+ -                     14                                   C                  -
+ -                     15                                   C                  -
+ -                     16                                   C                  -
+ -                     17                                   C                  -
+ -                     18                                   C                  -
+ -                     19                                   C                  -
+ -                     20                                   C                  -
+ -                     21                                   C                  -
+ -                     22                                   C                  -
+ -                     23                                   C                  -
+ -                     24                                   C                  -
+ -                     25                                   C                  -
+ -                     26                                   C                  -
+ -                     27                                   C                  -
+ -                     28                                   C                  -
+ -                     29                                   C                  -
+ -                     30                                   C                  -
+ -                     31                                   C                  -
+ -                     32                                   C                  -
+ -                     33                                   C                  -
+ -                     34                                   C                  -
+ -                     35                                   C                  -
+ -                     36                                   C                  -
+ -                     37                                   C                  -
+ -                     38                                   C                  -
+ -                     39                                   C                  -
+ -                     40                                   C                  -
+ -                     41                                   C                  -
+ -                     42                                   C                  -
+ -                     43                                   C                  -
+ -                     44                                   C                  -
+ -                     45                                   C                  -
+ -                     46                                   C                  -
+ -                     47                                   C                  -
+ -                     48                                   C                  -
+ -                     49                                   C                  -
+ -                     50                                   C                  -
+ -                     51                                   C                  -
+ -                     52                                   C                  -
+ -                     53                                   C                  -
+ -                     54                                   C                  -
+ -                     55                                   C                  -
+ -                     56                                   C                  -
+ -                     57                                   C                  -
+ -                     58                                   C                  -
+ -                     59                                   C                  -
+ -                     60                                   C                  -
+ -                     61                                   C                  -
+ -                     62                                   C                  -
+ -                     63                                   C                  -
+ -                     64                                   C                  -
+ -                     65                                   C                  -
+ -                     66                                   C                  -
+ -                     67                                   C                  -
+ -                     68                                   C                  -
+ -                     69                                   C                  -
+ -                     70                                   C                  -
+ -                     71                                   C                  -
+ -                     72                                   C                  -
+ -                     73                                   C                  -
+ -                     74                                   C                  -
+ -                     75                                   C                  -
+ -                     76                                   C                  -
+ -                     77                                   C                  -
+ -                     78                                   C                  -
+ -                     79                                   C                  -
+ -                     80                                   C                  -
+ -                     81                                   C                  -
+ -                     82                                   C                  -
+ -                     83                                   C                  -
+ -                     84                                   C                  -
+ -                     85                                   C                  -
+ -                     86                                   C                  -
+ -                     87                                   C                  -
+ -                     88                                   C                  -
+ -                     89                                   C                  -
+ -                     90                                   C                  -
+ -                     91                                   C                  -
+ -                     92                                   C                  -
+ -                     93                                   C                  -
+ -                     94                                   C                  -
+ -                     95                                   C                  -
+ -                     96                                   C                  -
+ -                     97                                   C                  -
+ -                     98                                   C                  -
+ -                     99                                   C                  -
+ -                    100                                   C                  -
+ -                    101                                   C                  -
+ -                    102                                   C                  -
+ -                    103                                   C                  -
+ -                    104                                   C                  -
+ -                    105                                   C                  -
+ -                    106                                   C                  -
+ -                    107                                   C                  -
+ -                    108                                   C                  -
+ -                    109                                   C                  -
+ -                    110                                   C                  -
+ -                    111                                   C                  -
+ -                    112                                   C                  -
+ -                    113                                   C                  -
+ -                    114                                   C                  -
+ -                    115                                   C                  -
+ -                    116                                   C                  -
+ -                    117                                   C                  -
+ -                    118                                   C                  -
+ -                    119                                   C                  -
+ -                    120                                   C                  -
+ -                    121                                   C                  -
+ -                    122                                   C                  -
+ -                    123                                   C                  -
+ -                    124                                   C                  -
+ -                    125                                   C                  -
+ -                    126                                   C                  -
+ -                    127                                   C                  -
+ -                    128                                   C                  -
+ -                    129                                   C                  -
+ -                    130                                   C                  -
+ -                    131                                   C                  -
+ -                    132                                   C                  -
+ -                    133                                   C                  -
+ -                    134                                   C                  -
+ -                    135                                   C                  -
+ -                    136                                   C                  -
+ -                    137                                   C                  -
+ -                    138                                   C                  -
+ -                    139                                   C                  -
+ -                    140                                   C                  -
+ -                    141                                   C                  -
+ -                    142                                   C                  -
+ -                    143                                   C                  -
+ -                    144                                   C                  -
+ -                    145                                   C                  -
+ -                    146                                   C                  -
+ -                    147                                   C                  -
+ -                    148                                   C                  -
+ -                    149                                   C                  -
+ -                    150                                   C                  -
+ -                    151                                   C                  -
+ -                    152                                   C                  -
+ -                    153                                   C                  -
+ -                    154                                   C                  -
+ -                    155                                   C                  -
+ -                    156                                   C                  -
+ -                    157                                   C                  -
+ -                    158                                   C                  -
+ -                    159                                   C                  -
+ -                    160                                   C                  -
+ -                    161                                   C                  -
+ -                    162                                   C                  -
+ -                    163                                   C                  -
+ -                    164                                   C                  -
+ -                    165                                   C                  -
+ -                    166                                   C                  -
+ -                    167                                   C                  -
+ -                    168                                   C                  -
+ -                    169                                   C                  -
+ -                    170                                   C                  -
+ -                    171                                   C                  -
+ -                    172                                   C                  -
+ -                    173                                   C                  -
+ -                    174                                   C                  -
+ -                    175                                   C                  -
+ -                    176                                   C                  -
+ -                    177                                   C                  -
+ -                    178                                   C                  -
+ -                    179                                   C                  -
+ -                    180                                   C                  -
+ -                    181                                   C                  -
+ -                    182                                   C                  -
+ -                    183                                   C                  -
+ -                    184                                   C                  -
+ -                    185                                   C                  -
+ -                    186                                   C                  -
+ -                    187                                   C                  -
+ -                    188                                   C                  -
+ -                    189                                   C                  -
+ -                    190                                   C                  -
+ -                    191                                   C                  -
+ -                    192                                   C                  -
+ -                    193                                   C                  -
+ -                    194                                   C                  -
+ -                    195                                   C                  -
+ -                    196                                   C                  -
+ -                    197                                   C                  -
+ -                    198                                   C                  -
+ -                    199                                   C                  -
+ -                    200                                   C                  -
+ -                    201                                   C                  -
+ -                    202                                   C                  -
+ -                    203                                   C                  -
+ -                    204                                   C                  -
+ -                    205                                   C                  -
+ -                    206                                   C                  -
+ -                    207                                   C                  -
+ -                    208                                   C                  -
+ -                    209                                   C                  -
+ -                    210                                   C                  -
+ -                    211                                   C                  -
+ -                    212                                   C                  -
+ -                    213                                   C                  -
+ -                    214                                   C                  -
+ -                    215                                   C                  -
+ -                    216                                   C                  -
+ -                    217                                   C                  -
+ -                    218                                   C                  -
+ -                    219                                   C                  -
+ -                    220                                   C                  -
+ -                    221                                   C                  -
+ -                    222                                   C                  -
+ -                    223                                   C                  -
+ -                    224                                   C                  -
+ -------------------------------------------------------------------------------
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K developers group (2000 - 2018)           **
+ **                                                                           **
+ *******************************************************************************
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   1
+                             - Atoms:                                        224
+                             - Shell sets:                                   224
+                             - Shells:                                      1120
+                             - Primitive Cartesian functions:               1120
+                             - Cartesian basis functions:                   3136
+                             - Spherical basis functions:                   2912
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          2
+                             - Non-local part of the GTH pseudopotential:      0
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        3.00E-07
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       100  100
+                        --------------------------------------------------------
+                        Mixing method:                            BROYDEN_MIXING
+                                                charge density mixing in g-space
+                        --------------------------------------------------------
+                        Smear method:                                FERMI_DIRAC
+                        Electronic temperature [K]:                        300.0
+                        Electronic temperature [a.u.]:                  9.50E-04
+                        Accuracy threshold:                             1.00E-10
+                        --------------------------------------------------------
+                        Outer loop SCF in use 
+                        No variables optimised in outer loop
+                        eps_scf                                         1.00E-06
+                        max_scf                                               30
+                        DIIS optimization
+                        DIIS buffer length                                     3
+                        step_size                                       5.00E-01
+
+ Spin 1
+
+ Number of electrons:                                                        448
+ Number of occupied orbitals:                                                448
+ Number of molecular orbitals:                                               548
+
+ Spin 2
+
+ Number of electrons:                                                        448
+ Number of occupied orbitals:                                                448
+ Number of molecular orbitals:                                               548
+
+ Number of orbital functions:                                               2912
+ Number of independent orbital functions:                                   2912
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 NoMix/Diag. 0.10E+00    8.4     0.45113435     -1260.0322253349 -1.26E+03
+     2 Broy./Diag. 0.10E+00   13.7     0.00160654     -1203.1239075788  5.69E+01
+     3 Broy./Diag. 0.10E+00   13.7     7.56952417     -1247.6868601442 -4.46E+01
+     4 Broy./Diag. 0.10E+00   14.0     7.56943125     -1147.3452317994  1.00E+02
+     5 Broy./Diag. 0.10E+00   14.2     7.55299107     -1241.0872711249 -9.37E+01
+     6 Broy./Diag. 0.10E+00   14.3     7.58036664     -1264.9266028256 -2.38E+01
+     7 Broy./Diag. 0.10E+00   14.7     7.58036347     -1081.7856202115  1.83E+02
+     8 Broy./Diag. 0.10E+00   15.0     7.58630105     -1265.1493632633 -1.83E+02
+     9 Broy./Diag. 0.10E+00   15.3     7.58629812     -1137.2072127398  1.28E+02
+    10 Broy./Diag. 0.10E+00   15.7     7.56075405     -1265.3102985854 -1.28E+02
+    11 Broy./Diag. 0.10E+00   15.8     7.56075144     -1114.3301025155  1.51E+02
+    12 Broy./Diag. 0.10E+00   15.8     7.60296164     -1266.4013911507 -1.52E+02
+    13 Broy./Diag. 0.10E+00   15.9     7.60295918     -1080.5291786845  1.86E+02
+    14 Broy./Diag. 0.10E+00   15.8     7.58129075     -1266.2116534624 -1.86E+02
+    15 Broy./Diag. 0.10E+00   15.8     7.58128834     -1178.4262932562  8.78E+01
+    16 Broy./Diag. 0.10E+00   15.8     4.78644685     -1266.9273463156 -8.85E+01
+    17 Broy./Diag. 0.10E+00   15.9     4.78644424     -1251.3924715634  1.55E+01
+    18 Broy./Diag. 0.10E+00   15.7     7.48219656     -1266.9168184058 -1.55E+01
+    19 Broy./Diag. 0.10E+00   15.6     7.48219452     -1192.8610228052  7.41E+01
+    20 Broy./Diag. 0.10E+00   15.9     7.57869016     -1267.1001940699 -7.42E+01
+    21 Broy./Diag. 0.10E+00   15.9     7.57868797     -1244.3477653738  2.28E+01
+    22 Broy./Diag. 0.10E+00   15.9     7.09874787     -1267.1839841520 -2.28E+01
+    23 Broy./Diag. 0.10E+00   15.9     7.09874551     -1242.7133984116  2.45E+01
+    24 Broy./Diag. 0.10E+00   15.8     0.14773745     -1267.0222006754 -2.43E+01
+    25 Broy./Diag. 0.10E+00   15.9     0.14737074     -1267.0125761163  9.62E-03
+    26 Broy./Diag. 0.10E+00   15.9     0.94141344     -1267.2484339678 -2.36E-01
+    27 Broy./Diag. 0.10E+00   15.7     0.94140774     -1263.7885006848  3.46E+00
+    28 Broy./Diag. 0.10E+00   15.8     0.11157075     -1267.1614173593 -3.37E+00
+    29 Broy./Diag. 0.10E+00   15.9     0.09102121     -1266.9100983359  2.51E-01
+    30 Broy./Diag. 0.10E+00   15.9     0.05556114     -1267.4385937111 -5.28E-01
+    31 Broy./Diag. 0.10E+00   15.9     0.05325997     -1267.3495352214  8.91E-02
+    32 Broy./Diag. 0.10E+00   15.8     0.03730230     -1267.4747630339 -1.25E-01
+    33 Broy./Diag. 0.10E+00   15.8     0.00545269     -1267.5564455037 -8.17E-02
+    34 Broy./Diag. 0.10E+00   15.8     0.00293606     -1268.1315797498 -5.75E-01
+    35 Broy./Diag. 0.10E+00   15.8     0.00335078     -1268.3586015492 -2.27E-01
+    36 Broy./Diag. 0.10E+00   15.7     0.00221024     -1268.6192326589 -2.61E-01
+    37 Broy./Diag. 0.10E+00   15.6     0.00023842     -1268.8549839695 -2.36E-01
+    38 Broy./Diag. 0.10E+00   15.9     0.01930379     -1268.9789548579 -1.24E-01
+    39 Broy./Diag. 0.10E+00   15.8     0.00210118     -1269.1122136371 -1.33E-01
+    40 Broy./Diag. 0.10E+00   15.9     0.01683574     -1269.1254709733 -1.33E-02
+    41 Broy./Diag. 0.10E+00   15.9     0.00394198     -1269.1349960600 -9.53E-03
+    42 Broy./Diag. 0.10E+00   15.8     0.00382070     -1269.1394498909 -4.45E-03
+    43 Broy./Diag. 0.10E+00   15.8     0.00008245     -1269.1558649119 -1.64E-02
+    44 Broy./Diag. 0.10E+00   15.9     0.00079995     -1269.1533741905  2.49E-03
+    45 Broy./Diag. 0.10E+00   15.8     0.00048175     -1269.1533470564  2.71E-05
+    46 Broy./Diag. 0.10E+00   15.8     0.00030936     -1269.1513790833  1.97E-03
+    47 Broy./Diag. 0.10E+00   15.9     0.00050738     -1269.1496672693  1.71E-03
+    48 Broy./Diag. 0.10E+00   15.9     0.00008768     -1269.1565034312 -6.84E-03
+    49 Broy./Diag. 0.10E+00   15.9     0.00047478     -1269.1760065218 -1.95E-02
+    50 Broy./Diag. 0.10E+00   15.8     0.00004109     -1269.1905488885 -1.45E-02
+    51 Broy./Diag. 0.10E+00   15.7     0.00008460     -1269.1957949961 -5.25E-03
+    52 Broy./Diag. 0.10E+00   15.8     0.00007326     -1269.2023911154 -6.60E-03
+    53 Broy./Diag. 0.10E+00   15.9     0.00011384     -1269.2035106242 -1.12E-03
+    54 Broy./Diag. 0.10E+00   15.8     0.00005649     -1269.2041154015 -6.05E-04
+    55 Broy./Diag. 0.10E+00   15.7     0.00007705     -1269.2044169419 -3.02E-04
+    56 Broy./Diag. 0.10E+00   15.9     0.00001768     -1269.2042213381  1.96E-04
+    57 Broy./Diag. 0.10E+00   15.8     0.00001475     -1269.2042542059 -3.29E-05
+    58 Broy./Diag. 0.10E+00   15.9     0.00003195     -1269.2055034995 -1.25E-03
+    59 Broy./Diag. 0.10E+00   15.8     0.00000644     -1269.2054788586  2.46E-05
+    60 Broy./Diag. 0.10E+00   15.8     0.00000573     -1269.2043509851  1.13E-03
+    61 Broy./Diag. 0.10E+00   15.9     0.00001785     -1269.2040060783  3.45E-04
+    62 Broy./Diag. 0.10E+00   15.9     0.00000914     -1269.2046551341 -6.49E-04
+    63 Broy./Diag. 0.10E+00   15.8     0.00001761     -1269.2055271891 -8.72E-04
+    64 Broy./Diag. 0.10E+00   15.8     0.00000211     -1269.2060288078 -5.02E-04
+    65 Broy./Diag. 0.10E+00   15.9     0.00000359     -1269.2058560754  1.73E-04
+    66 Broy./Diag. 0.10E+00   15.9     0.00000542     -1269.2057010519  1.55E-04
+    67 Broy./Diag. 0.10E+00   15.8     0.00000377     -1269.2058703692 -1.69E-04
+    68 Broy./Diag. 0.10E+00   15.8     0.00000572     -1269.2058212233  4.91E-05
+    69 Broy./Diag. 0.10E+00   15.8     0.00000112     -1269.2056532155  1.68E-04
+    70 Broy./Diag. 0.10E+00   15.8     0.00000437     -1269.2058323759 -1.79E-04
+    71 Broy./Diag. 0.10E+00   15.9     0.00000062     -1269.2060942730 -2.62E-04
+    72 Broy./Diag. 0.10E+00   15.8     0.00000255     -1269.2059564049  1.38E-04
+    73 Broy./Diag. 0.10E+00   15.7     0.00000265     -1269.2058654710  9.09E-05
+    74 Broy./Diag. 0.10E+00   15.9     0.00000173     -1269.2058447532  2.07E-05
+    75 Broy./Diag. 0.10E+00   15.7     0.00000067     -1269.2058430819  1.67E-06
+    76 Broy./Diag. 0.10E+00   15.9     0.00000031     -1269.2058212551  2.18E-05
+    77 Broy./Diag. 0.10E+00   15.9     0.00000030     -1269.2057846526  3.66E-05
+    78 Broy./Diag. 0.10E+00   15.8     0.00000101     -1269.2057948762 -1.02E-05
+    79 Broy./Diag. 0.10E+00   15.9     0.00000017     -1269.2058287376 -3.39E-05
+
+  *** SCF run converged in    79 steps ***
+
+
+  Electronic density on regular grids:       -895.9999999997        0.0000000003
+  Core density on regular grids:              895.9999999992       -0.0000000008
+  Total charge density on r-space grids:       -0.0000000005
+  Total charge density g-space grids:          -0.0000000005
+
+  Overlap energy of the core charge distribution:               0.00003703078023
+  Self energy of the core charge distribution:              -2987.04177559540722
+  Core Hamiltonian energy:                                    940.88632759437928
+  Hartree energy:                                            1162.94886823621164
+  Exchange-correlation energy:                               -385.16823196941692
+  Dispersion energy:                                           -0.83105402979280
+  Electronic entropic energy:                                  -0.00000000431795
+  Fermi energy:                                                -0.06562489572639
+
+  Total energy:                                             -1269.20582873756348
+
+  outer SCF iter =    1 RMS gradient =   0.17E-06 energy =      -1269.2058287376
+  outer SCF loop converged in   1 iterations or   79 steps
+
+
+  Integrated absolute spin density  :                               0.0000000000
+  WARNING: S**2 computation does not yet treat fractional occupied orbitals
+
+ *** WARNING in qs_loc_utils.F:1387 :: User requested the calculation of ***
+ *** the localized wavefunction but the section LOCALIZE was not         ***
+ *** specified. Localization will not be performed!                      ***
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -  BSSE CALCULATION         FRAGMENT CONF: 01        FRAGMENT SUBCONF: 01     -
+ -                           CHARGE =     0           MULTIPLICITY =     0     -
+ -                                                                             -
+ -                 ATOM INDEX                              ATOM NAME           -
+ -                 ----------                              ---------           -
+ -                    225                                   Na                 -
+ -------------------------------------------------------------------------------
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K developers group (2000 - 2018)           **
+ **                                                                           **
+ *******************************************************************************
+
+ *** WARNING in qs_environment.F:1128 :: More added MOs requested for beta ***
+ *** spin than available.                                                  ***
+
+
+ *** WARNING in qs_environment.F:1142 :: More added MOs requested than ***
+ *** available. The full set of unoccupied MOs will be used.           ***
+
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   1
+                             - Atoms:                                          1
+                             - Shell sets:                                     1
+                             - Shells:                                         5
+                             - Primitive Cartesian functions:                  7
+                             - Cartesian basis functions:                      9
+                             - Spherical basis functions:                      9
+
+  Maximum angular momentum of- Orbital basis functions:                        1
+                             - Local part of the GTH pseudopotential:          2
+                             - Non-local part of the GTH pseudopotential:      1
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        3.00E-07
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                         4    5
+                        --------------------------------------------------------
+                        Mixing method:                            BROYDEN_MIXING
+                                                charge density mixing in g-space
+                        --------------------------------------------------------
+                        Smear method:                                FERMI_DIRAC
+                        Electronic temperature [K]:                        300.0
+                        Electronic temperature [a.u.]:                  9.50E-04
+                        Accuracy threshold:                             1.00E-10
+                        --------------------------------------------------------
+                        Outer loop SCF in use 
+                        No variables optimised in outer loop
+                        eps_scf                                         1.00E-06
+                        max_scf                                               30
+                        DIIS optimization
+                        DIIS buffer length                                     3
+                        step_size                                       5.00E-01
+
+ Spin 1
+
+ Number of electrons:                                                          5
+ Number of occupied orbitals:                                                  5
+ Number of molecular orbitals:                                                 9
+
+ Spin 2
+
+ Number of electrons:                                                          4
+ Number of occupied orbitals:                                                  4
+ Number of molecular orbitals:                                                 9
+
+ Number of orbital functions:                                                  9
+ Number of independent orbital functions:                                      9
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 NoMix/Diag. 0.10E+00    1.7     0.36442463       -47.1689112374 -4.72E+01
+     2 Broy./Diag. 0.10E+00    3.9     0.01252805       -47.1413226207  2.76E-02
+     3 Broy./Diag. 0.10E+00    4.1     0.06978195       -47.1651429663 -2.38E-02
+     4 Broy./Diag. 0.10E+00    4.1     0.00077404       -47.1489381012  1.62E-02
+     5 Broy./Diag. 0.10E+00    4.3     0.00341870       -47.1600819716 -1.11E-02
+     6 Broy./Diag. 0.10E+00    4.4     0.00154366       -47.1547581040  5.32E-03
+     7 Broy./Diag. 0.10E+00    4.6     0.01112914       -47.1613237099 -6.57E-03
+     8 Broy./Diag. 0.10E+00    4.7     0.00244872       -47.1685813199 -7.26E-03
+     9 Broy./Diag. 0.10E+00    5.0     0.00298156       -47.1681799482  4.01E-04
+    10 Broy./Diag. 0.10E+00    5.4     0.00440161       -47.1702753302 -2.10E-03
+    11 Broy./Diag. 0.10E+00    5.4     0.00100201       -47.1687845579  1.49E-03
+    12 Broy./Diag. 0.10E+00    5.4     0.00191976       -47.1648314451  3.95E-03
+    13 Broy./Diag. 0.10E+00    5.4     0.00081153       -47.1725501252 -7.72E-03
+    14 Broy./Diag. 0.10E+00    5.4     0.00128481       -47.1717297178  8.20E-04
+    15 Broy./Diag. 0.10E+00    5.4     0.00023951       -47.1735679363 -1.84E-03
+    16 Broy./Diag. 0.10E+00    5.4     0.00008770       -47.1738651700 -2.97E-04
+    17 Broy./Diag. 0.10E+00    5.5     0.00046651       -47.1743576303 -4.92E-04
+    18 Broy./Diag. 0.10E+00    5.5     0.00007768       -47.1683880725  5.97E-03
+    19 Broy./Diag. 0.10E+00    5.3     0.00022246       -47.1545799989  1.38E-02
+    20 Broy./Diag. 0.10E+00    5.5     0.00026036       -47.1539276402  6.52E-04
+    21 Broy./Diag. 0.10E+00    5.5     0.00020636       -47.1575870370 -3.66E-03
+    22 Broy./Diag. 0.10E+00    5.4     0.00006828       -47.1586145331 -1.03E-03
+    23 Broy./Diag. 0.10E+00    5.4     0.00010922       -47.1550445606  3.57E-03
+    24 Broy./Diag. 0.10E+00    5.3     0.00012084       -47.1530495336  2.00E-03
+    25 Broy./Diag. 0.10E+00    5.4     0.00027255       -47.1563943003 -3.34E-03
+    26 Broy./Diag. 0.10E+00    5.4     0.00009061       -47.1594197919 -3.03E-03
+    27 Broy./Diag. 0.10E+00    5.4     0.00004171       -47.1603680542 -9.48E-04
+    28 Broy./Diag. 0.10E+00    5.4     0.00007422       -47.1604652738 -9.72E-05
+    29 Broy./Diag. 0.10E+00    5.5     0.00022814       -47.1599640108  5.01E-04
+    30 Broy./Diag. 0.10E+00    5.5     0.00002926       -47.1600186396 -5.46E-05
+    31 Broy./Diag. 0.10E+00    5.4     0.00006995       -47.1597422271  2.76E-04
+    32 Broy./Diag. 0.10E+00    5.3     0.00008099       -47.1598907307 -1.49E-04
+    33 Broy./Diag. 0.10E+00    5.5     0.00010723       -47.1599824230 -9.17E-05
+    34 Broy./Diag. 0.10E+00    5.5     0.00001436       -47.1598862932  9.61E-05
+    35 Broy./Diag. 0.10E+00    5.4     0.00002749       -47.1594591760  4.27E-04
+    36 Broy./Diag. 0.10E+00    5.5     0.00004976       -47.1598266681 -3.67E-04
+    37 Broy./Diag. 0.10E+00    5.4     0.00001376       -47.1597807875  4.59E-05
+    38 Broy./Diag. 0.10E+00    5.5     0.00001985       -47.1595222247  2.59E-04
+    39 Broy./Diag. 0.10E+00    5.4     0.00004544       -47.1595333627 -1.11E-05
+    40 Broy./Diag. 0.10E+00    5.3     0.00001290       -47.1595472359 -1.39E-05
+    41 Broy./Diag. 0.10E+00    5.4     0.00004283       -47.1594899789  5.73E-05
+    42 Broy./Diag. 0.10E+00    5.4     0.00002165       -47.1595544359 -6.45E-05
+    43 Broy./Diag. 0.10E+00    5.4     0.00000453       -47.1596508223 -9.64E-05
+    44 Broy./Diag. 0.10E+00    5.4     0.00001657       -47.1594166746  2.34E-04
+    45 Broy./Diag. 0.10E+00    5.4     0.00000938       -47.1594674723 -5.08E-05
+    46 Broy./Diag. 0.10E+00    5.4     0.00000416       -47.1595873294 -1.20E-04
+    47 Broy./Diag. 0.10E+00    5.4     0.00000724       -47.1595899457 -2.62E-06
+    48 Broy./Diag. 0.10E+00    5.4     0.00000845       -47.1595671908  2.28E-05
+    49 Broy./Diag. 0.10E+00    5.4     0.00000157       -47.1595740380 -6.85E-06
+    50 Broy./Diag. 0.10E+00    5.4     0.00000219       -47.1595551320  1.89E-05
+    51 Broy./Diag. 0.10E+00    5.4     0.00000247       -47.1595174265  3.77E-05
+    52 Broy./Diag. 0.10E+00    5.4     0.00000378       -47.1595241047 -6.68E-06
+    53 Broy./Diag. 0.10E+00    5.5     0.00000652       -47.1595273428 -3.24E-06
+    54 Broy./Diag. 0.10E+00    5.5     0.00000480       -47.1595261595  1.18E-06
+    55 Broy./Diag. 0.10E+00    5.3     0.00000313       -47.1595216388  4.52E-06
+    56 Broy./Diag. 0.10E+00    5.4     0.00000282       -47.1595214639  1.75E-07
+    57 Broy./Diag. 0.10E+00    5.4     0.00000133       -47.1595343379 -1.29E-05
+    58 Broy./Diag. 0.10E+00    5.4     0.00000364       -47.1595395049 -5.17E-06
+    59 Broy./Diag. 0.10E+00    5.4     0.00000078       -47.1595335429  5.96E-06
+    60 Broy./Diag. 0.10E+00    5.4     0.00000298       -47.1595258462  7.70E-06
+    61 Broy./Diag. 0.10E+00    5.4     0.00000353       -47.1595117444  1.41E-05
+    62 Broy./Diag. 0.10E+00    5.4     0.00000412       -47.1595120414 -2.97E-07
+    63 Broy./Diag. 0.10E+00    5.3     0.00000120       -47.1595066409  5.40E-06
+    64 Broy./Diag. 0.10E+00    5.3     0.00000387       -47.1594988000  7.84E-06
+    65 Broy./Diag. 0.10E+00    5.4     0.00000217       -47.1595027316 -3.93E-06
+    66 Broy./Diag. 0.10E+00    5.4     0.00000107       -47.1595128315 -1.01E-05
+    67 Broy./Diag. 0.10E+00    5.4     0.00000213       -47.1595186629 -5.83E-06
+    68 Broy./Diag. 0.10E+00    5.4     0.00001142       -47.1595252136 -6.55E-06
+    69 Broy./Diag. 0.10E+00    5.5     0.00000081       -47.1595713438 -4.61E-05
+    70 Broy./Diag. 0.10E+00    5.4     0.00000298       -47.1595705236  8.20E-07
+    71 Broy./Diag. 0.10E+00    5.4     0.00000104       -47.1595778332 -7.31E-06
+    72 Broy./Diag. 0.10E+00    5.4     0.00000116       -47.1595748030  3.03E-06
+    73 Broy./Diag. 0.10E+00    5.3     0.00000121       -47.1595680101  6.79E-06
+    74 Broy./Diag. 0.10E+00    5.5     0.00000094       -47.1595613212  6.69E-06
+    75 Broy./Diag. 0.10E+00    5.4     0.00000569       -47.1595587782  2.54E-06
+    76 Broy./Diag. 0.10E+00    5.3     0.00000151       -47.1595862546 -2.75E-05
+    77 Broy./Diag. 0.10E+00    5.4     0.00000103       -47.1595763708  9.88E-06
+    78 Broy./Diag. 0.10E+00    5.3     0.00000210       -47.1595841262 -7.76E-06
+    79 Broy./Diag. 0.10E+00    5.3     0.00000082       -47.1595790979  5.03E-06
+    80 Broy./Diag. 0.10E+00    5.3     0.00000057       -47.1595737251  5.37E-06
+    81 Broy./Diag. 0.10E+00    5.3     0.00000131       -47.1595687447  4.98E-06
+    82 Broy./Diag. 0.10E+00    5.3     0.00000040       -47.1595626083  6.14E-06
+    83 Broy./Diag. 0.10E+00    5.4     0.00000068       -47.1595644649 -1.86E-06
+    84 Broy./Diag. 0.10E+00    5.4     0.00000241       -47.1595318742  3.26E-05
+    85 Broy./Diag. 0.10E+00    5.4     0.00000103       -47.1595192626  1.26E-05
+    86 Broy./Diag. 0.10E+00    5.4     0.00000099       -47.1595225764 -3.31E-06
+    87 Broy./Diag. 0.10E+00    5.4     0.00000105       -47.1595195369  3.04E-06
+    88 Broy./Diag. 0.10E+00    5.4     0.00000219       -47.1595033815  1.62E-05
+    89 Broy./Diag. 0.10E+00    5.4     0.00000101       -47.1595122678 -8.89E-06
+    90 Broy./Diag. 0.10E+00    5.5     0.00000048       -47.1595212904 -9.02E-06
+    91 Broy./Diag. 0.10E+00    5.3     0.00000071       -47.1595186056  2.68E-06
+    92 Broy./Diag. 0.10E+00    5.5     0.00000072       -47.1595156004  3.01E-06
+    93 Broy./Diag. 0.10E+00    5.4     0.00000069       -47.1595158854 -2.85E-07
+    94 Broy./Diag. 0.10E+00    5.4     0.00000079       -47.1595178554 -1.97E-06
+    95 Broy./Diag. 0.10E+00    5.3     0.00000054       -47.1595196884 -1.83E-06
+    96 Broy./Diag. 0.10E+00    5.3     0.00000032       -47.1595185503  1.14E-06
+    97 Broy./Diag. 0.10E+00    5.4     0.00000026       -47.1595179938  5.57E-07
+
+  *** SCF run converged in    97 steps ***
+
+
+  Electronic density on regular grids:         -9.0001401266       -0.0001401266
+  Core density on regular grids:                9.0000000000       -0.0000000000
+  Total charge density on r-space grids:       -0.0001401266
+  Total charge density g-space grids:          -0.0001401266
+
+  Overlap energy of the core charge distribution:               0.00000000000000
+  Self energy of the core charge distribution:                -96.60649019442629
+  Core Hamiltonian energy:                                     29.74711835064284
+  Hartree energy:                                              26.74357909792778
+  Exchange-correlation energy:                                 -7.04372206900763
+  Dispersion energy:                                           -0.00000317792349
+  Electronic entropic energy:                                  -0.00000000101531
+  Fermi energy:                                                -0.08397248982344
+
+  Total energy:                                               -47.15951799380147
+
+  outer SCF iter =    1 RMS gradient =   0.26E-06 energy =        -47.1595179938
+  outer SCF loop converged in   1 iterations or   97 steps
+
+
+  Integrated absolute spin density  :                               1.0000151414
+  WARNING: S**2 computation does not yet treat fractional occupied orbitals
+
+ *** WARNING in qs_loc_utils.F:1387 :: User requested the calculation of ***
+ *** the localized wavefunction but the section LOCALIZE was not         ***
+ *** specified. Localization will not be performed!                      ***
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -  BSSE CALCULATION         FRAGMENT CONF: 11        FRAGMENT SUBCONF: 10     -
+ -                           CHARGE =     0           MULTIPLICITY =     0     -
+ -                                                                             -
+ -                 ATOM INDEX                              ATOM NAME           -
+ -                 ----------                              ---------           -
+ -                      1                                   C                  -
+ -                      2                                   C                  -
+ -                      3                                   C                  -
+ -                      4                                   C                  -
+ -                      5                                   C                  -
+ -                      6                                   C                  -
+ -                      7                                   C                  -
+ -                      8                                   C                  -
+ -                      9                                   C                  -
+ -                     10                                   C                  -
+ -                     11                                   C                  -
+ -                     12                                   C                  -
+ -                     13                                   C                  -
+ -                     14                                   C                  -
+ -                     15                                   C                  -
+ -                     16                                   C                  -
+ -                     17                                   C                  -
+ -                     18                                   C                  -
+ -                     19                                   C                  -
+ -                     20                                   C                  -
+ -                     21                                   C                  -
+ -                     22                                   C                  -
+ -                     23                                   C                  -
+ -                     24                                   C                  -
+ -                     25                                   C                  -
+ -                     26                                   C                  -
+ -                     27                                   C                  -
+ -                     28                                   C                  -
+ -                     29                                   C                  -
+ -                     30                                   C                  -
+ -                     31                                   C                  -
+ -                     32                                   C                  -
+ -                     33                                   C                  -
+ -                     34                                   C                  -
+ -                     35                                   C                  -
+ -                     36                                   C                  -
+ -                     37                                   C                  -
+ -                     38                                   C                  -
+ -                     39                                   C                  -
+ -                     40                                   C                  -
+ -                     41                                   C                  -
+ -                     42                                   C                  -
+ -                     43                                   C                  -
+ -                     44                                   C                  -
+ -                     45                                   C                  -
+ -                     46                                   C                  -
+ -                     47                                   C                  -
+ -                     48                                   C                  -
+ -                     49                                   C                  -
+ -                     50                                   C                  -
+ -                     51                                   C                  -
+ -                     52                                   C                  -
+ -                     53                                   C                  -
+ -                     54                                   C                  -
+ -                     55                                   C                  -
+ -                     56                                   C                  -
+ -                     57                                   C                  -
+ -                     58                                   C                  -
+ -                     59                                   C                  -
+ -                     60                                   C                  -
+ -                     61                                   C                  -
+ -                     62                                   C                  -
+ -                     63                                   C                  -
+ -                     64                                   C                  -
+ -                     65                                   C                  -
+ -                     66                                   C                  -
+ -                     67                                   C                  -
+ -                     68                                   C                  -
+ -                     69                                   C                  -
+ -                     70                                   C                  -
+ -                     71                                   C                  -
+ -                     72                                   C                  -
+ -                     73                                   C                  -
+ -                     74                                   C                  -
+ -                     75                                   C                  -
+ -                     76                                   C                  -
+ -                     77                                   C                  -
+ -                     78                                   C                  -
+ -                     79                                   C                  -
+ -                     80                                   C                  -
+ -                     81                                   C                  -
+ -                     82                                   C                  -
+ -                     83                                   C                  -
+ -                     84                                   C                  -
+ -                     85                                   C                  -
+ -                     86                                   C                  -
+ -                     87                                   C                  -
+ -                     88                                   C                  -
+ -                     89                                   C                  -
+ -                     90                                   C                  -
+ -                     91                                   C                  -
+ -                     92                                   C                  -
+ -                     93                                   C                  -
+ -                     94                                   C                  -
+ -                     95                                   C                  -
+ -                     96                                   C                  -
+ -                     97                                   C                  -
+ -                     98                                   C                  -
+ -                     99                                   C                  -
+ -                    100                                   C                  -
+ -                    101                                   C                  -
+ -                    102                                   C                  -
+ -                    103                                   C                  -
+ -                    104                                   C                  -
+ -                    105                                   C                  -
+ -                    106                                   C                  -
+ -                    107                                   C                  -
+ -                    108                                   C                  -
+ -                    109                                   C                  -
+ -                    110                                   C                  -
+ -                    111                                   C                  -
+ -                    112                                   C                  -
+ -                    113                                   C                  -
+ -                    114                                   C                  -
+ -                    115                                   C                  -
+ -                    116                                   C                  -
+ -                    117                                   C                  -
+ -                    118                                   C                  -
+ -                    119                                   C                  -
+ -                    120                                   C                  -
+ -                    121                                   C                  -
+ -                    122                                   C                  -
+ -                    123                                   C                  -
+ -                    124                                   C                  -
+ -                    125                                   C                  -
+ -                    126                                   C                  -
+ -                    127                                   C                  -
+ -                    128                                   C                  -
+ -                    129                                   C                  -
+ -                    130                                   C                  -
+ -                    131                                   C                  -
+ -                    132                                   C                  -
+ -                    133                                   C                  -
+ -                    134                                   C                  -
+ -                    135                                   C                  -
+ -                    136                                   C                  -
+ -                    137                                   C                  -
+ -                    138                                   C                  -
+ -                    139                                   C                  -
+ -                    140                                   C                  -
+ -                    141                                   C                  -
+ -                    142                                   C                  -
+ -                    143                                   C                  -
+ -                    144                                   C                  -
+ -                    145                                   C                  -
+ -                    146                                   C                  -
+ -                    147                                   C                  -
+ -                    148                                   C                  -
+ -                    149                                   C                  -
+ -                    150                                   C                  -
+ -                    151                                   C                  -
+ -                    152                                   C                  -
+ -                    153                                   C                  -
+ -                    154                                   C                  -
+ -                    155                                   C                  -
+ -                    156                                   C                  -
+ -                    157                                   C                  -
+ -                    158                                   C                  -
+ -                    159                                   C                  -
+ -                    160                                   C                  -
+ -                    161                                   C                  -
+ -                    162                                   C                  -
+ -                    163                                   C                  -
+ -                    164                                   C                  -
+ -                    165                                   C                  -
+ -                    166                                   C                  -
+ -                    167                                   C                  -
+ -                    168                                   C                  -
+ -                    169                                   C                  -
+ -                    170                                   C                  -
+ -                    171                                   C                  -
+ -                    172                                   C                  -
+ -                    173                                   C                  -
+ -                    174                                   C                  -
+ -                    175                                   C                  -
+ -                    176                                   C                  -
+ -                    177                                   C                  -
+ -                    178                                   C                  -
+ -                    179                                   C                  -
+ -                    180                                   C                  -
+ -                    181                                   C                  -
+ -                    182                                   C                  -
+ -                    183                                   C                  -
+ -                    184                                   C                  -
+ -                    185                                   C                  -
+ -                    186                                   C                  -
+ -                    187                                   C                  -
+ -                    188                                   C                  -
+ -                    189                                   C                  -
+ -                    190                                   C                  -
+ -                    191                                   C                  -
+ -                    192                                   C                  -
+ -                    193                                   C                  -
+ -                    194                                   C                  -
+ -                    195                                   C                  -
+ -                    196                                   C                  -
+ -                    197                                   C                  -
+ -                    198                                   C                  -
+ -                    199                                   C                  -
+ -                    200                                   C                  -
+ -                    201                                   C                  -
+ -                    202                                   C                  -
+ -                    203                                   C                  -
+ -                    204                                   C                  -
+ -                    205                                   C                  -
+ -                    206                                   C                  -
+ -                    207                                   C                  -
+ -                    208                                   C                  -
+ -                    209                                   C                  -
+ -                    210                                   C                  -
+ -                    211                                   C                  -
+ -                    212                                   C                  -
+ -                    213                                   C                  -
+ -                    214                                   C                  -
+ -                    215                                   C                  -
+ -                    216                                   C                  -
+ -                    217                                   C                  -
+ -                    218                                   C                  -
+ -                    219                                   C                  -
+ -                    220                                   C                  -
+ -                    221                                   C                  -
+ -                    222                                   C                  -
+ -                    223                                   C                  -
+ -                    224                                   C                  -
+ -                    225                                   Na_ghost           -
+ -------------------------------------------------------------------------------
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K developers group (2000 - 2018)           **
+ **                                                                           **
+ *******************************************************************************
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   2
+                             - Atoms:                                        225
+                             - Shell sets:                                   225
+                             - Shells:                                      1125
+                             - Primitive Cartesian functions:               1127
+                             - Cartesian basis functions:                   3145
+                             - Spherical basis functions:                   2921
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          2
+                             - Non-local part of the GTH pseudopotential:      0
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        3.00E-07
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       100  100
+                        --------------------------------------------------------
+                        Mixing method:                            BROYDEN_MIXING
+                                                charge density mixing in g-space
+                        --------------------------------------------------------
+                        Smear method:                                FERMI_DIRAC
+                        Electronic temperature [K]:                        300.0
+                        Electronic temperature [a.u.]:                  9.50E-04
+                        Accuracy threshold:                             1.00E-10
+                        --------------------------------------------------------
+                        Outer loop SCF in use 
+                        No variables optimised in outer loop
+                        eps_scf                                         1.00E-06
+                        max_scf                                               30
+                        DIIS optimization
+                        DIIS buffer length                                     3
+                        step_size                                       5.00E-01
+
+ Spin 1
+
+ Number of electrons:                                                        448
+ Number of occupied orbitals:                                                448
+ Number of molecular orbitals:                                               548
+
+ Spin 2
+
+ Number of electrons:                                                        448
+ Number of occupied orbitals:                                                448
+ Number of molecular orbitals:                                               548
+
+ Number of orbital functions:                                               2921
+ Number of independent orbital functions:                                   2921
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 NoMix/Diag. 0.10E+00    8.3     0.45110667     -1260.0322253349 -1.26E+03
+     2 Broy./Diag. 0.10E+00   13.6     0.00160820     -1203.1110677217  5.69E+01
+     3 Broy./Diag. 0.10E+00   13.7     7.57235533     -1247.6622344851 -4.46E+01
+     4 Broy./Diag. 0.10E+00   13.8     7.57229244     -1144.5595717527  1.03E+02
+     5 Broy./Diag. 0.10E+00   14.0     7.57428502     -1263.8126758963 -1.19E+02
+     6 Broy./Diag. 0.10E+00   14.1     7.57428328     -1044.9820450251  2.19E+02
+     7 Broy./Diag. 0.10E+00   14.4     7.58142307     -1265.3475716254 -2.20E+02
+     8 Broy./Diag. 0.10E+00   14.7     7.58142472     -1130.5141667356  1.35E+02
+     9 Broy./Diag. 0.10E+00   15.1     7.57997537     -1265.6416767423 -1.35E+02
+    10 Broy./Diag. 0.10E+00   15.4     7.57997343     -1042.7107523004  2.23E+02
+    11 Broy./Diag. 0.10E+00   15.5     7.61497931     -1266.3479315788 -2.24E+02
+    12 Broy./Diag. 0.10E+00   15.5     7.61497686     -1099.3360772587  1.67E+02
+    13 Broy./Diag. 0.10E+00   15.5     7.58741326     -1266.0600079902 -1.67E+02
+    14 Broy./Diag. 0.10E+00   15.5     7.58741081     -1175.9046559733  9.02E+01
+    15 Broy./Diag. 0.10E+00   15.5     7.33327141     -1266.8346858602 -9.09E+01
+    16 Broy./Diag. 0.10E+00   15.4     7.33890621     -1223.3076267758  4.35E+01
+    17 Broy./Diag. 0.10E+00   15.6     7.52282506     -1266.8414623856 -4.35E+01
+    18 Broy./Diag. 0.10E+00   15.5     7.52282302     -1179.6390870730  8.72E+01
+    19 Broy./Diag. 0.10E+00   15.3     7.62828388     -1266.9635032304 -8.73E+01
+    20 Broy./Diag. 0.10E+00   15.5     7.62828168     -1244.0348642715  2.29E+01
+    21 Broy./Diag. 0.10E+00   15.5     7.50848309     -1267.1045615832 -2.31E+01
+    22 Broy./Diag. 0.10E+00   15.6     7.50848096     -1223.0225049094  4.41E+01
+    23 Broy./Diag. 0.10E+00   15.5     1.09524251     -1267.0788512384 -4.41E+01
+    24 Broy./Diag. 0.10E+00   15.4     1.09523310     -1263.5578576956  3.52E+00
+    25 Broy./Diag. 0.10E+00   15.5     6.12631189     -1267.2475664841 -3.69E+00
+    26 Broy./Diag. 0.10E+00   15.5     6.12630965     -1248.8524327213  1.84E+01
+    27 Broy./Diag. 0.10E+00   15.4     3.23834694     -1267.2216040861 -1.84E+01
+    28 Broy./Diag. 0.10E+00   15.4     3.23834442     -1250.3747865260  1.68E+01
+    29 Broy./Diag. 0.10E+00   15.5     0.07287100     -1267.2927686839 -1.69E+01
+    30 Broy./Diag. 0.10E+00   15.5     0.07132941     -1267.2206065520  7.22E-02
+    31 Broy./Diag. 0.10E+00   15.6     0.04750171     -1267.4205018433 -2.00E-01
+    32 Broy./Diag. 0.10E+00   15.4     0.04652013     -1267.4856104684 -6.51E-02
+    33 Broy./Diag. 0.10E+00   15.5     0.01369916     -1267.5282055706 -4.26E-02
+    34 Broy./Diag. 0.10E+00   15.5     0.00132305     -1267.6723871154 -1.44E-01
+    35 Broy./Diag. 0.10E+00   15.5     0.00023142     -1268.1626541634 -4.90E-01
+    36 Broy./Diag. 0.10E+00   15.5     0.00150806     -1268.4906205306 -3.28E-01
+    37 Broy./Diag. 0.10E+00   15.3     0.00345500     -1268.8015560062 -3.11E-01
+    38 Broy./Diag. 0.10E+00   15.5     0.00242017     -1268.9629176878 -1.61E-01
+    39 Broy./Diag. 0.10E+00   15.5     0.00200300     -1269.0344108477 -7.15E-02
+    40 Broy./Diag. 0.10E+00   15.5     0.00172358     -1269.1087836206 -7.44E-02
+    41 Broy./Diag. 0.10E+00   15.6     0.00045566     -1269.1292957100 -2.05E-02
+    42 Broy./Diag. 0.10E+00   15.5     0.00055800     -1269.1378245898 -8.53E-03
+    43 Broy./Diag. 0.10E+00   15.5     0.00002404     -1269.1625970919 -2.48E-02
+    44 Broy./Diag. 0.10E+00   15.5     0.00030557     -1269.1572291454  5.37E-03
+    45 Broy./Diag. 0.10E+00   15.5     0.00002006     -1269.1752489626 -1.80E-02
+    46 Broy./Diag. 0.10E+00   15.5     0.00014499     -1269.1818198929 -6.57E-03
+    47 Broy./Diag. 0.10E+00   15.6     0.00002367     -1269.1991289939 -1.73E-02
+    48 Broy./Diag. 0.10E+00   15.6     0.00004930     -1269.2100981919 -1.10E-02
+    49 Broy./Diag. 0.10E+00   15.6     0.00005774     -1269.2108311195 -7.33E-04
+    50 Broy./Diag. 0.10E+00   15.5     0.00002044     -1269.2062346524  4.60E-03
+    51 Broy./Diag. 0.10E+00   15.5     0.00000946     -1269.2019377877  4.30E-03
+    52 Broy./Diag. 0.10E+00   15.5     0.00002366     -1269.2011693955  7.68E-04
+    53 Broy./Diag. 0.10E+00   15.6     0.00002540     -1269.2050646643 -3.90E-03
+    54 Broy./Diag. 0.10E+00   15.5     0.00002378     -1269.2069505461 -1.89E-03
+    55 Broy./Diag. 0.10E+00   15.4     0.00001734     -1269.2079829652 -1.03E-03
+    56 Broy./Diag. 0.10E+00   15.5     0.00000781     -1269.2092324720 -1.25E-03
+    57 Broy./Diag. 0.10E+00   15.5     0.00001460     -1269.2093284481 -9.60E-05
+    58 Broy./Diag. 0.10E+00   15.6     0.00000824     -1269.2087014404  6.27E-04
+    59 Broy./Diag. 0.10E+00   15.5     0.00000263     -1269.2087020395 -5.99E-07
+    60 Broy./Diag. 0.10E+00   15.4     0.00000423     -1269.2092584331 -5.56E-04
+    61 Broy./Diag. 0.10E+00   15.5     0.00000233     -1269.2099358633 -6.77E-04
+    62 Broy./Diag. 0.10E+00   15.6     0.00000615     -1269.2097801628  1.56E-04
+    63 Broy./Diag. 0.10E+00   15.5     0.00000219     -1269.2093071317  4.73E-04
+    64 Broy./Diag. 0.10E+00   15.5     0.00000478     -1269.2089883730  3.19E-04
+    65 Broy./Diag. 0.10E+00   15.6     0.00000090     -1269.2089376652  5.07E-05
+    66 Broy./Diag. 0.10E+00   15.6     0.00000247     -1269.2089427930 -5.13E-06
+    67 Broy./Diag. 0.10E+00   15.5     0.00000039     -1269.2091140579 -1.71E-04
+    68 Broy./Diag. 0.10E+00   15.5     0.00000083     -1269.2092171343 -1.03E-04
+    69 Broy./Diag. 0.10E+00   15.5     0.00000041     -1269.2093260286 -1.09E-04
+    70 Broy./Diag. 0.10E+00   15.5     0.00000037     -1269.2093617366 -3.57E-05
+    71 Broy./Diag. 0.10E+00   15.6     0.00000039     -1269.2093712528 -9.52E-06
+    72 Broy./Diag. 0.10E+00   15.5     0.00000035     -1269.2094033269 -3.21E-05
+    73 Broy./Diag. 0.10E+00   15.4     0.00000032     -1269.2094894686 -8.61E-05
+    74 Broy./Diag. 0.10E+00   15.6     0.00000020     -1269.2095467124 -5.72E-05
+
+  *** SCF run converged in    74 steps ***
+
+
+  Electronic density on regular grids:       -895.9999999975        0.0000000025
+  Core density on regular grids:              895.9999999992       -0.0000000008
+  Total charge density on r-space grids:        0.0000000017
+  Total charge density g-space grids:           0.0000000017
+
+  Overlap energy of the core charge distribution:               0.00003703078023
+  Self energy of the core charge distribution:              -2987.04177559540722
+  Core Hamiltonian energy:                                    940.86909092221663
+  Hartree energy:                                            1162.96639136028102
+  Exchange-correlation energy:                               -385.17223639616100
+  Dispersion energy:                                           -0.83105402979280
+  Electronic entropic energy:                                  -0.00000000432459
+  Fermi energy:                                                -0.06566171268889
+
+  Total energy:                                             -1269.20954671240770
+
+  outer SCF iter =    1 RMS gradient =   0.20E-06 energy =      -1269.2095467124
+  outer SCF loop converged in   1 iterations or   74 steps
+
+
+  Integrated absolute spin density  :                               0.0000000000
+  WARNING: S**2 computation does not yet treat fractional occupied orbitals
+
+ *** WARNING in qs_loc_utils.F:1387 :: User requested the calculation of ***
+ *** the localized wavefunction but the section LOCALIZE was not         ***
+ *** specified. Localization will not be performed!                      ***
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -  BSSE CALCULATION         FRAGMENT CONF: 11        FRAGMENT SUBCONF: 01     -
+ -                           CHARGE =     0           MULTIPLICITY =     0     -
+ -                                                                             -
+ -                 ATOM INDEX                              ATOM NAME           -
+ -                 ----------                              ---------           -
+ -                      1                                   C_ghost            -
+ -                      2                                   C_ghost            -
+ -                      3                                   C_ghost            -
+ -                      4                                   C_ghost            -
+ -                      5                                   C_ghost            -
+ -                      6                                   C_ghost            -
+ -                      7                                   C_ghost            -
+ -                      8                                   C_ghost            -
+ -                      9                                   C_ghost            -
+ -                     10                                   C_ghost            -
+ -                     11                                   C_ghost            -
+ -                     12                                   C_ghost            -
+ -                     13                                   C_ghost            -
+ -                     14                                   C_ghost            -
+ -                     15                                   C_ghost            -
+ -                     16                                   C_ghost            -
+ -                     17                                   C_ghost            -
+ -                     18                                   C_ghost            -
+ -                     19                                   C_ghost            -
+ -                     20                                   C_ghost            -
+ -                     21                                   C_ghost            -
+ -                     22                                   C_ghost            -
+ -                     23                                   C_ghost            -
+ -                     24                                   C_ghost            -
+ -                     25                                   C_ghost            -
+ -                     26                                   C_ghost            -
+ -                     27                                   C_ghost            -
+ -                     28                                   C_ghost            -
+ -                     29                                   C_ghost            -
+ -                     30                                   C_ghost            -
+ -                     31                                   C_ghost            -
+ -                     32                                   C_ghost            -
+ -                     33                                   C_ghost            -
+ -                     34                                   C_ghost            -
+ -                     35                                   C_ghost            -
+ -                     36                                   C_ghost            -
+ -                     37                                   C_ghost            -
+ -                     38                                   C_ghost            -
+ -                     39                                   C_ghost            -
+ -                     40                                   C_ghost            -
+ -                     41                                   C_ghost            -
+ -                     42                                   C_ghost            -
+ -                     43                                   C_ghost            -
+ -                     44                                   C_ghost            -
+ -                     45                                   C_ghost            -
+ -                     46                                   C_ghost            -
+ -                     47                                   C_ghost            -
+ -                     48                                   C_ghost            -
+ -                     49                                   C_ghost            -
+ -                     50                                   C_ghost            -
+ -                     51                                   C_ghost            -
+ -                     52                                   C_ghost            -
+ -                     53                                   C_ghost            -
+ -                     54                                   C_ghost            -
+ -                     55                                   C_ghost            -
+ -                     56                                   C_ghost            -
+ -                     57                                   C_ghost            -
+ -                     58                                   C_ghost            -
+ -                     59                                   C_ghost            -
+ -                     60                                   C_ghost            -
+ -                     61                                   C_ghost            -
+ -                     62                                   C_ghost            -
+ -                     63                                   C_ghost            -
+ -                     64                                   C_ghost            -
+ -                     65                                   C_ghost            -
+ -                     66                                   C_ghost            -
+ -                     67                                   C_ghost            -
+ -                     68                                   C_ghost            -
+ -                     69                                   C_ghost            -
+ -                     70                                   C_ghost            -
+ -                     71                                   C_ghost            -
+ -                     72                                   C_ghost            -
+ -                     73                                   C_ghost            -
+ -                     74                                   C_ghost            -
+ -                     75                                   C_ghost            -
+ -                     76                                   C_ghost            -
+ -                     77                                   C_ghost            -
+ -                     78                                   C_ghost            -
+ -                     79                                   C_ghost            -
+ -                     80                                   C_ghost            -
+ -                     81                                   C_ghost            -
+ -                     82                                   C_ghost            -
+ -                     83                                   C_ghost            -
+ -                     84                                   C_ghost            -
+ -                     85                                   C_ghost            -
+ -                     86                                   C_ghost            -
+ -                     87                                   C_ghost            -
+ -                     88                                   C_ghost            -
+ -                     89                                   C_ghost            -
+ -                     90                                   C_ghost            -
+ -                     91                                   C_ghost            -
+ -                     92                                   C_ghost            -
+ -                     93                                   C_ghost            -
+ -                     94                                   C_ghost            -
+ -                     95                                   C_ghost            -
+ -                     96                                   C_ghost            -
+ -                     97                                   C_ghost            -
+ -                     98                                   C_ghost            -
+ -                     99                                   C_ghost            -
+ -                    100                                   C_ghost            -
+ -                    101                                   C_ghost            -
+ -                    102                                   C_ghost            -
+ -                    103                                   C_ghost            -
+ -                    104                                   C_ghost            -
+ -                    105                                   C_ghost            -
+ -                    106                                   C_ghost            -
+ -                    107                                   C_ghost            -
+ -                    108                                   C_ghost            -
+ -                    109                                   C_ghost            -
+ -                    110                                   C_ghost            -
+ -                    111                                   C_ghost            -
+ -                    112                                   C_ghost            -
+ -                    113                                   C_ghost            -
+ -                    114                                   C_ghost            -
+ -                    115                                   C_ghost            -
+ -                    116                                   C_ghost            -
+ -                    117                                   C_ghost            -
+ -                    118                                   C_ghost            -
+ -                    119                                   C_ghost            -
+ -                    120                                   C_ghost            -
+ -                    121                                   C_ghost            -
+ -                    122                                   C_ghost            -
+ -                    123                                   C_ghost            -
+ -                    124                                   C_ghost            -
+ -                    125                                   C_ghost            -
+ -                    126                                   C_ghost            -
+ -                    127                                   C_ghost            -
+ -                    128                                   C_ghost            -
+ -                    129                                   C_ghost            -
+ -                    130                                   C_ghost            -
+ -                    131                                   C_ghost            -
+ -                    132                                   C_ghost            -
+ -                    133                                   C_ghost            -
+ -                    134                                   C_ghost            -
+ -                    135                                   C_ghost            -
+ -                    136                                   C_ghost            -
+ -                    137                                   C_ghost            -
+ -                    138                                   C_ghost            -
+ -                    139                                   C_ghost            -
+ -                    140                                   C_ghost            -
+ -                    141                                   C_ghost            -
+ -                    142                                   C_ghost            -
+ -                    143                                   C_ghost            -
+ -                    144                                   C_ghost            -
+ -                    145                                   C_ghost            -
+ -                    146                                   C_ghost            -
+ -                    147                                   C_ghost            -
+ -                    148                                   C_ghost            -
+ -                    149                                   C_ghost            -
+ -                    150                                   C_ghost            -
+ -                    151                                   C_ghost            -
+ -                    152                                   C_ghost            -
+ -                    153                                   C_ghost            -
+ -                    154                                   C_ghost            -
+ -                    155                                   C_ghost            -
+ -                    156                                   C_ghost            -
+ -                    157                                   C_ghost            -
+ -                    158                                   C_ghost            -
+ -                    159                                   C_ghost            -
+ -                    160                                   C_ghost            -
+ -                    161                                   C_ghost            -
+ -                    162                                   C_ghost            -
+ -                    163                                   C_ghost            -
+ -                    164                                   C_ghost            -
+ -                    165                                   C_ghost            -
+ -                    166                                   C_ghost            -
+ -                    167                                   C_ghost            -
+ -                    168                                   C_ghost            -
+ -                    169                                   C_ghost            -
+ -                    170                                   C_ghost            -
+ -                    171                                   C_ghost            -
+ -                    172                                   C_ghost            -
+ -                    173                                   C_ghost            -
+ -                    174                                   C_ghost            -
+ -                    175                                   C_ghost            -
+ -                    176                                   C_ghost            -
+ -                    177                                   C_ghost            -
+ -                    178                                   C_ghost            -
+ -                    179                                   C_ghost            -
+ -                    180                                   C_ghost            -
+ -                    181                                   C_ghost            -
+ -                    182                                   C_ghost            -
+ -                    183                                   C_ghost            -
+ -                    184                                   C_ghost            -
+ -                    185                                   C_ghost            -
+ -                    186                                   C_ghost            -
+ -                    187                                   C_ghost            -
+ -                    188                                   C_ghost            -
+ -                    189                                   C_ghost            -
+ -                    190                                   C_ghost            -
+ -                    191                                   C_ghost            -
+ -                    192                                   C_ghost            -
+ -                    193                                   C_ghost            -
+ -                    194                                   C_ghost            -
+ -                    195                                   C_ghost            -
+ -                    196                                   C_ghost            -
+ -                    197                                   C_ghost            -
+ -                    198                                   C_ghost            -
+ -                    199                                   C_ghost            -
+ -                    200                                   C_ghost            -
+ -                    201                                   C_ghost            -
+ -                    202                                   C_ghost            -
+ -                    203                                   C_ghost            -
+ -                    204                                   C_ghost            -
+ -                    205                                   C_ghost            -
+ -                    206                                   C_ghost            -
+ -                    207                                   C_ghost            -
+ -                    208                                   C_ghost            -
+ -                    209                                   C_ghost            -
+ -                    210                                   C_ghost            -
+ -                    211                                   C_ghost            -
+ -                    212                                   C_ghost            -
+ -                    213                                   C_ghost            -
+ -                    214                                   C_ghost            -
+ -                    215                                   C_ghost            -
+ -                    216                                   C_ghost            -
+ -                    217                                   C_ghost            -
+ -                    218                                   C_ghost            -
+ -                    219                                   C_ghost            -
+ -                    220                                   C_ghost            -
+ -                    221                                   C_ghost            -
+ -                    222                                   C_ghost            -
+ -                    223                                   C_ghost            -
+ -                    224                                   C_ghost            -
+ -                    225                                   Na                 -
+ -------------------------------------------------------------------------------
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K developers group (2000 - 2018)           **
+ **                                                                           **
+ *******************************************************************************
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   2
+                             - Atoms:                                        225
+                             - Shell sets:                                   225
+                             - Shells:                                      1125
+                             - Primitive Cartesian functions:               1127
+                             - Cartesian basis functions:                   3145
+                             - Spherical basis functions:                   2921
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          2
+                             - Non-local part of the GTH pseudopotential:      1
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        3.00E-07
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       100  100
+                        --------------------------------------------------------
+                        Mixing method:                            BROYDEN_MIXING
+                                                charge density mixing in g-space
+                        --------------------------------------------------------
+                        Smear method:                                FERMI_DIRAC
+                        Electronic temperature [K]:                        300.0
+                        Electronic temperature [a.u.]:                  9.50E-04
+                        Accuracy threshold:                             1.00E-10
+                        --------------------------------------------------------
+                        Outer loop SCF in use 
+                        No variables optimised in outer loop
+                        eps_scf                                         1.00E-06
+                        max_scf                                               30
+                        DIIS optimization
+                        DIIS buffer length                                     3
+                        step_size                                       5.00E-01
+
+ Spin 1
+
+ Number of electrons:                                                          5
+ Number of occupied orbitals:                                                  5
+ Number of molecular orbitals:                                               105
+
+ Spin 2
+
+ Number of electrons:                                                          4
+ Number of occupied orbitals:                                                  4
+ Number of molecular orbitals:                                               104
+
+ Number of orbital functions:                                               2921
+ Number of independent orbital functions:                                   2921
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 NoMix/Diag. 0.10E+00    8.0     0.37383704       -47.1689112374 -4.72E+01
+     2 Broy./Diag. 0.10E+00   13.5     0.01166199       -47.1644825594  4.43E-03
+     3 Broy./Diag. 0.10E+00   13.7     0.09121131       -47.1785625306 -1.41E-02
+     4 Broy./Diag. 0.10E+00   13.7     0.00190758       -47.1473294251  3.12E-02
+     5 Broy./Diag. 0.10E+00   13.8     0.01797587       -47.1622565768 -1.49E-02
+     6 Broy./Diag. 0.10E+00   13.9     0.00229533       -47.1508700688  1.14E-02
+     7 Broy./Diag. 0.10E+00   14.2     0.01106011       -47.1546815723 -3.81E-03
+     8 Broy./Diag. 0.10E+00   14.5     0.00343553       -47.1694492427 -1.48E-02
+     9 Broy./Diag. 0.10E+00   14.8     0.00752955       -47.1620754765  7.37E-03
+    10 Broy./Diag. 0.10E+00   15.2     0.00917155       -47.1712347358 -9.16E-03
+    11 Broy./Diag. 0.10E+00   15.2     0.00123149       -47.1791006811 -7.87E-03
+    12 Broy./Diag. 0.10E+00   15.2     0.00501695       -47.1728146524  6.29E-03
+    13 Broy./Diag. 0.10E+00   15.3     0.00166664       -47.1846696703 -1.19E-02
+    14 Broy./Diag. 0.10E+00   15.2     0.00126615       -47.1865964089 -1.93E-03
+    15 Broy./Diag. 0.10E+00   15.2     0.00315249       -47.1815692872  5.03E-03
+    16 Broy./Diag. 0.10E+00   15.2     0.00030231       -47.1823854822 -8.16E-04
+    17 Broy./Diag. 0.10E+00   15.3     0.00111163       -47.1811708379  1.21E-03
+    18 Broy./Diag. 0.10E+00   15.3     0.00032567       -47.1731077247  8.06E-03
+    19 Broy./Diag. 0.10E+00   15.1     0.00031530       -47.1709169093  2.19E-03
+    20 Broy./Diag. 0.10E+00   15.2     0.00041978       -47.1736419920 -2.73E-03
+    21 Broy./Diag. 0.10E+00   15.2     0.00041175       -47.1750457224 -1.40E-03
+    22 Broy./Diag. 0.10E+00   15.2     0.00062993       -47.1762183119 -1.17E-03
+    23 Broy./Diag. 0.10E+00   15.2     0.00022437       -47.1743977004  1.82E-03
+    24 Broy./Diag. 0.10E+00   15.1     0.00066431       -47.1790510755 -4.65E-03
+    25 Broy./Diag. 0.10E+00   15.2     0.00018907       -47.1839244299 -4.87E-03
+    26 Broy./Diag. 0.10E+00   15.3     0.00022604       -47.1813152801  2.61E-03
+    27 Broy./Diag. 0.10E+00   15.1     0.00008471       -47.1785667544  2.75E-03
+    28 Broy./Diag. 0.10E+00   15.1     0.00011441       -47.1790061379 -4.39E-04
+    29 Broy./Diag. 0.10E+00   15.2     0.00040904       -47.1733312348  5.67E-03
+    30 Broy./Diag. 0.10E+00   15.3     0.00033177       -47.1675726838  5.76E-03
+    31 Broy./Diag. 0.10E+00   15.3     0.00017161       -47.1659525883  1.62E-03
+    32 Broy./Diag. 0.10E+00   15.2     0.00022131       -47.1666914665 -7.39E-04
+    33 Broy./Diag. 0.10E+00   15.2     0.00007318       -47.1662085517  4.83E-04
+    34 Broy./Diag. 0.10E+00   15.2     0.00008696       -47.1655801773  6.28E-04
+    35 Broy./Diag. 0.10E+00   15.2     0.00015952       -47.1644673025  1.11E-03
+    36 Broy./Diag. 0.10E+00   15.2     0.00075447       -47.1626438364  1.82E-03
+    37 Broy./Diag. 0.10E+00   15.1     0.00028484       -47.1625152859  1.29E-04
+    38 Broy./Diag. 0.10E+00   15.3     0.00008789       -47.1620264522  4.89E-04
+    39 Broy./Diag. 0.10E+00   15.3     0.00037296       -47.1608822227  1.14E-03
+    40 Broy./Diag. 0.10E+00   15.2     0.00012431       -47.1614225875 -5.40E-04
+    41 Broy./Diag. 0.10E+00   15.2     0.00004140       -47.1616749623 -2.52E-04
+    42 Broy./Diag. 0.10E+00   15.2     0.00005695       -47.1615573125  1.18E-04
+    43 Broy./Diag. 0.10E+00   15.2     0.00004007       -47.1614151144  1.42E-04
+    44 Broy./Diag. 0.10E+00   15.2     0.00004477       -47.1611282848  2.87E-04
+    45 Broy./Diag. 0.10E+00   15.1     0.00009953       -47.1606868363  4.41E-04
+    46 Broy./Diag. 0.10E+00   15.1     0.00005642       -47.1606531334  3.37E-05
+    47 Broy./Diag. 0.10E+00   15.2     0.00009490       -47.1606407529  1.24E-05
+    48 Broy./Diag. 0.10E+00   15.3     0.00006021       -47.1607339717 -9.32E-05
+    49 Broy./Diag. 0.10E+00   15.3     0.00003563       -47.1608401294 -1.06E-04
+    50 Broy./Diag. 0.10E+00   15.2     0.00001583       -47.1606644063  1.76E-04
+    51 Broy./Diag. 0.10E+00   15.2     0.00006483       -47.1606095916  5.48E-05
+    52 Broy./Diag. 0.10E+00   15.1     0.00005606       -47.1605936154  1.60E-05
+    53 Broy./Diag. 0.10E+00   15.3     0.00001435       -47.1606119345 -1.83E-05
+    54 Broy./Diag. 0.10E+00   15.2     0.00000756       -47.1605505032  6.14E-05
+    55 Broy./Diag. 0.10E+00   15.1     0.00001464       -47.1604875754  6.29E-05
+    56 Broy./Diag. 0.10E+00   15.3     0.00004188       -47.1605014658 -1.39E-05
+    57 Broy./Diag. 0.10E+00   15.3     0.00002807       -47.1605327497 -3.13E-05
+    58 Broy./Diag. 0.10E+00   15.2     0.00001659       -47.1605370277 -4.28E-06
+    59 Broy./Diag. 0.10E+00   15.2     0.00002724       -47.1605441442 -7.12E-06
+    60 Broy./Diag. 0.10E+00   15.1     0.00002408       -47.1604975034  4.66E-05
+    61 Broy./Diag. 0.10E+00   15.1     0.00000717       -47.1605013368 -3.83E-06
+    62 Broy./Diag. 0.10E+00   15.2     0.00002667       -47.1605193599 -1.80E-05
+    63 Broy./Diag. 0.10E+00   15.2     0.00000357       -47.1605234368 -4.08E-06
+    64 Broy./Diag. 0.10E+00   15.1     0.00000879       -47.1605211904  2.25E-06
+    65 Broy./Diag. 0.10E+00   15.2     0.00001061       -47.1605199639  1.23E-06
+    66 Broy./Diag. 0.10E+00   15.3     0.00000152       -47.1605090577  1.09E-05
+    67 Broy./Diag. 0.10E+00   15.2     0.00000240       -47.1605115820 -2.52E-06
+    68 Broy./Diag. 0.10E+00   15.1     0.00000561       -47.1605106190  9.63E-07
+    69 Broy./Diag. 0.10E+00   15.2     0.00000785       -47.1605088747  1.74E-06
+    70 Broy./Diag. 0.10E+00   15.1     0.00000907       -47.1605115845 -2.71E-06
+    71 Broy./Diag. 0.10E+00   15.3     0.00000321       -47.1605079003  3.68E-06
+    72 Broy./Diag. 0.10E+00   15.2     0.00000389       -47.1605061228  1.78E-06
+    73 Broy./Diag. 0.10E+00   15.1     0.00000356       -47.1605087025 -2.58E-06
+    74 Broy./Diag. 0.10E+00   15.3     0.00000197       -47.1605080459  6.57E-07
+    75 Broy./Diag. 0.10E+00   15.2     0.00000995       -47.1605057083  2.34E-06
+    76 Broy./Diag. 0.10E+00   15.1     0.00000159       -47.1604990196  6.69E-06
+    77 Broy./Diag. 0.10E+00   15.1     0.00000297       -47.1605016179 -2.60E-06
+    78 Broy./Diag. 0.10E+00   15.1     0.00000301       -47.1605016539 -3.61E-08
+    79 Broy./Diag. 0.10E+00   15.2     0.00000608       -47.1605025274 -8.73E-07
+    80 Broy./Diag. 0.10E+00   15.2     0.00000511       -47.1605130406 -1.05E-05
+    81 Broy./Diag. 0.10E+00   15.1     0.00000226       -47.1605256775 -1.26E-05
+    82 Broy./Diag. 0.10E+00   15.1     0.00000779       -47.1605293462 -3.67E-06
+    83 Broy./Diag. 0.10E+00   15.2     0.00000413       -47.1605279907  1.36E-06
+    84 Broy./Diag. 0.10E+00   15.2     0.00000252       -47.1605306126 -2.62E-06
+    85 Broy./Diag. 0.10E+00   15.2     0.00000186       -47.1605274624  3.15E-06
+    86 Broy./Diag. 0.10E+00   15.1     0.00000200       -47.1605166150  1.08E-05
+    87 Broy./Diag. 0.10E+00   15.2     0.00000912       -47.1605117695  4.85E-06
+    88 Broy./Diag. 0.10E+00   15.2     0.00000175       -47.1605186697 -6.90E-06
+    89 Broy./Diag. 0.10E+00   15.3     0.00000904       -47.1605207937 -2.12E-06
+    90 Broy./Diag. 0.10E+00   15.3     0.00000211       -47.1605245929 -3.80E-06
+    91 Broy./Diag. 0.10E+00   15.1     0.00000218       -47.1605213381  3.25E-06
+    92 Broy./Diag. 0.10E+00   15.2     0.00000427       -47.1605211737  1.64E-07
+    93 Broy./Diag. 0.10E+00   15.2     0.00000112       -47.1605193447  1.83E-06
+    94 Broy./Diag. 0.10E+00   15.2     0.00000072       -47.1605199140 -5.69E-07
+    95 Broy./Diag. 0.10E+00   15.2     0.00000120       -47.1605194769  4.37E-07
+    96 Broy./Diag. 0.10E+00   15.2     0.00000247       -47.1605196120 -1.35E-07
+    97 Broy./Diag. 0.10E+00   15.2     0.00000223       -47.1605168657  2.75E-06
+    98 Broy./Diag. 0.10E+00   15.2     0.00000331       -47.1605183942 -1.53E-06
+    99 Broy./Diag. 0.10E+00   15.1     0.00000130       -47.1605193688 -9.75E-07
+   100 Broy./Diag. 0.10E+00   15.0     0.00000200       -47.1605173434  2.03E-06
+
+  Leaving inner SCF loop after reaching   100 steps.
+
+
+  Electronic density on regular grids:         -9.0001400700       -0.0001400700
+  Core density on regular grids:                9.0000000000       -0.0000000000
+  Total charge density on r-space grids:       -0.0001400700
+  Total charge density g-space grids:          -0.0001400700
+
+  Overlap energy of the core charge distribution:               0.00000000000000
+  Self energy of the core charge distribution:                -96.60649019442629
+  Core Hamiltonian energy:                                     29.73146547736420
+  Hartree energy:                                              26.75370566162815
+  Exchange-correlation energy:                                 -7.03919510878200
+  Dispersion energy:                                           -0.00000317792349
+  Electronic entropic energy:                                  -0.00000000126940
+  Fermi energy:                                                -0.08703451459325
+
+  Total energy:                                               -47.16051734340720
+
+  outer SCF iter =    1 RMS gradient =   0.20E-05 energy =        -47.1605173434
+     1 Broy./Diag. 0.10E+00   27.9     0.00000566       -47.1605188531 -1.51E-06
+     2 Broy./Diag. 0.10E+00   15.2     0.00000492       -47.1605226491 -3.80E-06
+     3 Broy./Diag. 0.10E+00   15.2     0.00000164       -47.1605167466  5.90E-06
+     4 Broy./Diag. 0.10E+00   15.2     0.00000137       -47.1605193332 -2.59E-06
+     5 Broy./Diag. 0.10E+00   15.2     0.00000064       -47.1605175953  1.74E-06
+     6 Broy./Diag. 0.10E+00   15.1     0.00000092       -47.1605175909  4.49E-09
+     7 Broy./Diag. 0.10E+00   15.3     0.00000056       -47.1605177951 -2.04E-07
+     8 Broy./Diag. 0.10E+00   15.2     0.00000086       -47.1605177302  6.49E-08
+     9 Broy./Diag. 0.10E+00   15.0     0.00000148       -47.1605183434 -6.13E-07
+    10 Broy./Diag. 0.10E+00   15.2     0.00000106       -47.1605160534  2.29E-06
+    11 Broy./Diag. 0.10E+00   15.2     0.00000117       -47.1605175128 -1.46E-06
+    12 Broy./Diag. 0.10E+00   15.2     0.00000242       -47.1605182631 -7.50E-07
+    13 Broy./Diag. 0.10E+00   15.2     0.00000133       -47.1605158772  2.39E-06
+    14 Broy./Diag. 0.10E+00   15.2     0.00000093       -47.1605171679 -1.29E-06
+    15 Broy./Diag. 0.10E+00   15.2     0.00000027       -47.1605167713  3.97E-07
+
+  *** SCF run converged in    15 steps ***
+
+
+  Electronic density on regular grids:         -9.0001400700       -0.0001400700
+  Core density on regular grids:                9.0000000000       -0.0000000000
+  Total charge density on r-space grids:       -0.0001400700
+  Total charge density g-space grids:          -0.0001400700
+
+  Overlap energy of the core charge distribution:               0.00000000000000
+  Self energy of the core charge distribution:                -96.60649019442629
+  Core Hamiltonian energy:                                     29.73146585611457
+  Hartree energy:                                              26.75370588515424
+  Exchange-correlation energy:                                 -7.03919513906334
+  Dispersion energy:                                           -0.00000317792349
+  Electronic entropic energy:                                  -0.00000000117418
+  Fermi energy:                                                -0.08695606996461
+
+  Total energy:                                               -47.16051677131881
+
+  outer SCF iter =    2 RMS gradient =   0.27E-06 energy =        -47.1605167713
+  outer SCF loop converged in   2 iterations or  115 steps
+
+
+  Integrated absolute spin density  :                               1.0000294192
+  WARNING: S**2 computation does not yet treat fractional occupied orbitals
+
+ *** WARNING in qs_loc_utils.F:1387 :: User requested the calculation of ***
+ *** the localized wavefunction but the section LOCALIZE was not         ***
+ *** specified. Localization will not be performed!                      ***
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -  BSSE CALCULATION         FRAGMENT CONF: 11        FRAGMENT SUBCONF: 11     -
+ -                           CHARGE =     0           MULTIPLICITY =     0     -
+ -                                                                             -
+ -                 ATOM INDEX                              ATOM NAME           -
+ -                 ----------                              ---------           -
+ -                      1                                   C                  -
+ -                      2                                   C                  -
+ -                      3                                   C                  -
+ -                      4                                   C                  -
+ -                      5                                   C                  -
+ -                      6                                   C                  -
+ -                      7                                   C                  -
+ -                      8                                   C                  -
+ -                      9                                   C                  -
+ -                     10                                   C                  -
+ -                     11                                   C                  -
+ -                     12                                   C                  -
+ -                     13                                   C                  -
+ -                     14                                   C                  -
+ -                     15                                   C                  -
+ -                     16                                   C                  -
+ -                     17                                   C                  -
+ -                     18                                   C                  -
+ -                     19                                   C                  -
+ -                     20                                   C                  -
+ -                     21                                   C                  -
+ -                     22                                   C                  -
+ -                     23                                   C                  -
+ -                     24                                   C                  -
+ -                     25                                   C                  -
+ -                     26                                   C                  -
+ -                     27                                   C                  -
+ -                     28                                   C                  -
+ -                     29                                   C                  -
+ -                     30                                   C                  -
+ -                     31                                   C                  -
+ -                     32                                   C                  -
+ -                     33                                   C                  -
+ -                     34                                   C                  -
+ -                     35                                   C                  -
+ -                     36                                   C                  -
+ -                     37                                   C                  -
+ -                     38                                   C                  -
+ -                     39                                   C                  -
+ -                     40                                   C                  -
+ -                     41                                   C                  -
+ -                     42                                   C                  -
+ -                     43                                   C                  -
+ -                     44                                   C                  -
+ -                     45                                   C                  -
+ -                     46                                   C                  -
+ -                     47                                   C                  -
+ -                     48                                   C                  -
+ -                     49                                   C                  -
+ -                     50                                   C                  -
+ -                     51                                   C                  -
+ -                     52                                   C                  -
+ -                     53                                   C                  -
+ -                     54                                   C                  -
+ -                     55                                   C                  -
+ -                     56                                   C                  -
+ -                     57                                   C                  -
+ -                     58                                   C                  -
+ -                     59                                   C                  -
+ -                     60                                   C                  -
+ -                     61                                   C                  -
+ -                     62                                   C                  -
+ -                     63                                   C                  -
+ -                     64                                   C                  -
+ -                     65                                   C                  -
+ -                     66                                   C                  -
+ -                     67                                   C                  -
+ -                     68                                   C                  -
+ -                     69                                   C                  -
+ -                     70                                   C                  -
+ -                     71                                   C                  -
+ -                     72                                   C                  -
+ -                     73                                   C                  -
+ -                     74                                   C                  -
+ -                     75                                   C                  -
+ -                     76                                   C                  -
+ -                     77                                   C                  -
+ -                     78                                   C                  -
+ -                     79                                   C                  -
+ -                     80                                   C                  -
+ -                     81                                   C                  -
+ -                     82                                   C                  -
+ -                     83                                   C                  -
+ -                     84                                   C                  -
+ -                     85                                   C                  -
+ -                     86                                   C                  -
+ -                     87                                   C                  -
+ -                     88                                   C                  -
+ -                     89                                   C                  -
+ -                     90                                   C                  -
+ -                     91                                   C                  -
+ -                     92                                   C                  -
+ -                     93                                   C                  -
+ -                     94                                   C                  -
+ -                     95                                   C                  -
+ -                     96                                   C                  -
+ -                     97                                   C                  -
+ -                     98                                   C                  -
+ -                     99                                   C                  -
+ -                    100                                   C                  -
+ -                    101                                   C                  -
+ -                    102                                   C                  -
+ -                    103                                   C                  -
+ -                    104                                   C                  -
+ -                    105                                   C                  -
+ -                    106                                   C                  -
+ -                    107                                   C                  -
+ -                    108                                   C                  -
+ -                    109                                   C                  -
+ -                    110                                   C                  -
+ -                    111                                   C                  -
+ -                    112                                   C                  -
+ -                    113                                   C                  -
+ -                    114                                   C                  -
+ -                    115                                   C                  -
+ -                    116                                   C                  -
+ -                    117                                   C                  -
+ -                    118                                   C                  -
+ -                    119                                   C                  -
+ -                    120                                   C                  -
+ -                    121                                   C                  -
+ -                    122                                   C                  -
+ -                    123                                   C                  -
+ -                    124                                   C                  -
+ -                    125                                   C                  -
+ -                    126                                   C                  -
+ -                    127                                   C                  -
+ -                    128                                   C                  -
+ -                    129                                   C                  -
+ -                    130                                   C                  -
+ -                    131                                   C                  -
+ -                    132                                   C                  -
+ -                    133                                   C                  -
+ -                    134                                   C                  -
+ -                    135                                   C                  -
+ -                    136                                   C                  -
+ -                    137                                   C                  -
+ -                    138                                   C                  -
+ -                    139                                   C                  -
+ -                    140                                   C                  -
+ -                    141                                   C                  -
+ -                    142                                   C                  -
+ -                    143                                   C                  -
+ -                    144                                   C                  -
+ -                    145                                   C                  -
+ -                    146                                   C                  -
+ -                    147                                   C                  -
+ -                    148                                   C                  -
+ -                    149                                   C                  -
+ -                    150                                   C                  -
+ -                    151                                   C                  -
+ -                    152                                   C                  -
+ -                    153                                   C                  -
+ -                    154                                   C                  -
+ -                    155                                   C                  -
+ -                    156                                   C                  -
+ -                    157                                   C                  -
+ -                    158                                   C                  -
+ -                    159                                   C                  -
+ -                    160                                   C                  -
+ -                    161                                   C                  -
+ -                    162                                   C                  -
+ -                    163                                   C                  -
+ -                    164                                   C                  -
+ -                    165                                   C                  -
+ -                    166                                   C                  -
+ -                    167                                   C                  -
+ -                    168                                   C                  -
+ -                    169                                   C                  -
+ -                    170                                   C                  -
+ -                    171                                   C                  -
+ -                    172                                   C                  -
+ -                    173                                   C                  -
+ -                    174                                   C                  -
+ -                    175                                   C                  -
+ -                    176                                   C                  -
+ -                    177                                   C                  -
+ -                    178                                   C                  -
+ -                    179                                   C                  -
+ -                    180                                   C                  -
+ -                    181                                   C                  -
+ -                    182                                   C                  -
+ -                    183                                   C                  -
+ -                    184                                   C                  -
+ -                    185                                   C                  -
+ -                    186                                   C                  -
+ -                    187                                   C                  -
+ -                    188                                   C                  -
+ -                    189                                   C                  -
+ -                    190                                   C                  -
+ -                    191                                   C                  -
+ -                    192                                   C                  -
+ -                    193                                   C                  -
+ -                    194                                   C                  -
+ -                    195                                   C                  -
+ -                    196                                   C                  -
+ -                    197                                   C                  -
+ -                    198                                   C                  -
+ -                    199                                   C                  -
+ -                    200                                   C                  -
+ -                    201                                   C                  -
+ -                    202                                   C                  -
+ -                    203                                   C                  -
+ -                    204                                   C                  -
+ -                    205                                   C                  -
+ -                    206                                   C                  -
+ -                    207                                   C                  -
+ -                    208                                   C                  -
+ -                    209                                   C                  -
+ -                    210                                   C                  -
+ -                    211                                   C                  -
+ -                    212                                   C                  -
+ -                    213                                   C                  -
+ -                    214                                   C                  -
+ -                    215                                   C                  -
+ -                    216                                   C                  -
+ -                    217                                   C                  -
+ -                    218                                   C                  -
+ -                    219                                   C                  -
+ -                    220                                   C                  -
+ -                    221                                   C                  -
+ -                    222                                   C                  -
+ -                    223                                   C                  -
+ -                    224                                   C                  -
+ -                    225                                   Na                 -
+ -------------------------------------------------------------------------------
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K developers group (2000 - 2018)           **
+ **                                                                           **
+ *******************************************************************************
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   2
+                             - Atoms:                                        225
+                             - Shell sets:                                   225
+                             - Shells:                                      1125
+                             - Primitive Cartesian functions:               1127
+                             - Cartesian basis functions:                   3145
+                             - Spherical basis functions:                   2921
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          2
+                             - Non-local part of the GTH pseudopotential:      1
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        3.00E-07
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        added MOs                                       100  100
+                        --------------------------------------------------------
+                        Mixing method:                            BROYDEN_MIXING
+                                                charge density mixing in g-space
+                        --------------------------------------------------------
+                        Smear method:                                FERMI_DIRAC
+                        Electronic temperature [K]:                        300.0
+                        Electronic temperature [a.u.]:                  9.50E-04
+                        Accuracy threshold:                             1.00E-10
+                        --------------------------------------------------------
+                        Outer loop SCF in use 
+                        No variables optimised in outer loop
+                        eps_scf                                         1.00E-06
+                        max_scf                                               30
+                        DIIS optimization
+                        DIIS buffer length                                     3
+                        step_size                                       5.00E-01
+
+ Spin 1
+
+ Number of electrons:                                                        453
+ Number of occupied orbitals:                                                453
+ Number of molecular orbitals:                                               553
+
+ Spin 2
+
+ Number of electrons:                                                        452
+ Number of occupied orbitals:                                                452
+ Number of molecular orbitals:                                               552
+
+ Number of orbital functions:                                               2921
+ Number of independent orbital functions:                                   2921
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 NoMix/Diag. 0.10E+00    8.2     0.49865436     -1307.5270948971 -1.31E+03
+     2 Broy./Diag. 0.10E+00   13.6     0.00162558     -1249.8039429031  5.77E+01
+     3 Broy./Diag. 0.10E+00   13.7     7.59499273     -1294.6464535441 -4.48E+01
+     4 Broy./Diag. 0.10E+00   13.8     7.59492759     -1199.9524266545  9.47E+01
+     5 Broy./Diag. 0.10E+00   13.9     7.59919136     -1311.4773162056 -1.12E+02
+     6 Broy./Diag. 0.10E+00   14.1     7.59919089     -1035.1732396569  2.76E+02
+     7 Broy./Diag. 0.10E+00   14.3     7.62891970     -1312.6703150169 -2.77E+02
+     8 Broy./Diag. 0.10E+00   14.6     7.62892937     -1151.4131035587  1.61E+02
+     9 Broy./Diag. 0.10E+00   14.9     7.61522805     -1312.9415291757 -1.62E+02
+    10 Broy./Diag. 0.10E+00   15.3     7.61522584     -1113.7795275447  1.99E+02
+    11 Broy./Diag. 0.10E+00   15.4     7.63398440     -1313.5368578941 -2.00E+02
+    12 Broy./Diag. 0.10E+00   15.3     7.63398208     -1079.6115553262  2.34E+02
+    13 Broy./Diag. 0.10E+00   15.4     7.63046135     -1313.6313842228 -2.34E+02
+    14 Broy./Diag. 0.10E+00   15.3     7.63045634     -1224.0764128218  8.96E+01
+    15 Broy./Diag. 0.10E+00   15.4     7.61731375     -1313.9128318204 -8.98E+01
+    16 Broy./Diag. 0.10E+00   15.3     7.62281424     -1290.2960765435  2.36E+01
+    17 Broy./Diag. 0.10E+00   15.4     7.53698842     -1302.6526176669 -1.24E+01
+    18 Broy./Diag. 0.10E+00   15.4     7.63703626     -1314.0127239762 -1.14E+01
+    19 Broy./Diag. 0.10E+00   15.2     7.63703354     -1267.1469832454  4.69E+01
+    20 Broy./Diag. 0.10E+00   15.3     7.65921651     -1314.1019703672 -4.70E+01
+    21 Broy./Diag. 0.10E+00   15.3     7.65921455     -1297.2693995031  1.68E+01
+    22 Broy./Diag. 0.10E+00   15.4     7.65854674     -1314.1271698371 -1.69E+01
+    23 Broy./Diag. 0.10E+00   15.4     7.65854363     -1274.1470512550  4.00E+01
+    24 Broy./Diag. 0.10E+00   15.3     7.27251725     -1314.2353125822 -4.01E+01
+    25 Broy./Diag. 0.10E+00   15.3     7.27251445     -1303.4869824709  1.07E+01
+    26 Broy./Diag. 0.10E+00   15.4     7.69126263     -1314.3531794389 -1.09E+01
+    27 Broy./Diag. 0.10E+00   15.3     7.69126057     -1294.7967325152  1.96E+01
+    28 Broy./Diag. 0.10E+00   15.2     7.71144317     -1314.4232667167 -1.96E+01
+    29 Broy./Diag. 0.10E+00   15.4     7.71144114     -1279.3337725041  3.51E+01
+    30 Broy./Diag. 0.10E+00   15.5     7.05951448     -1314.4580726734 -3.51E+01
+    31 Broy./Diag. 0.10E+00   15.4     7.05951209     -1296.8321388073  1.76E+01
+    32 Broy./Diag. 0.10E+00   15.3     0.20452575     -1314.5306470527 -1.77E+01
+    33 Broy./Diag. 0.10E+00   15.4     0.19334110     -1314.3633836830  1.67E-01
+    34 Broy./Diag. 0.10E+00   15.3     0.06131411     -1314.6059921804 -2.43E-01
+    35 Broy./Diag. 0.10E+00   15.4     0.03558753     -1314.6442960354 -3.83E-02
+    36 Broy./Diag. 0.10E+00   15.4     0.01011859     -1314.7083077157 -6.40E-02
+    37 Broy./Diag. 0.10E+00   15.2     0.00070177     -1315.2086445535 -5.00E-01
+    38 Broy./Diag. 0.10E+00   15.4     0.00063308     -1315.5880161680 -3.79E-01
+    39 Broy./Diag. 0.10E+00   15.4     0.16716558     -1315.9629014735 -3.75E-01
+    40 Broy./Diag. 0.10E+00   15.4     0.01755336     -1316.0330282228 -7.01E-02
+    41 Broy./Diag. 0.10E+00   15.4     0.06795508     -1316.0580379060 -2.50E-02
+    42 Broy./Diag. 0.10E+00   15.4     0.05635350     -1316.1371003298 -7.91E-02
+    43 Broy./Diag. 0.10E+00   15.3     0.06062114     -1316.0906529190  4.64E-02
+    44 Broy./Diag. 0.10E+00   15.3     0.02561667     -1316.1919363491 -1.01E-01
+    45 Broy./Diag. 0.10E+00   15.2     0.02251301     -1316.2431150414 -5.12E-02
+    46 Broy./Diag. 0.10E+00   15.3     7.68386302     -1316.2696934593 -2.66E-02
+    47 Broy./Diag. 0.10E+00   15.4     7.69256828     -1304.5341237115  1.17E+01
+    48 Broy./Diag. 0.10E+00   15.4     7.64144712     -1316.3816377700 -1.18E+01
+    49 Broy./Diag. 0.10E+00   15.4     7.64380289     -1304.9031251049  1.15E+01
+    50 Broy./Diag. 0.10E+00   15.3     0.00337504     -1316.3448230989 -1.14E+01
+    51 Broy./Diag. 0.10E+00   15.3     0.00910202     -1316.3464054931 -1.58E-03
+    52 Broy./Diag. 0.10E+00   15.2     0.00198983     -1316.3436256600  2.78E-03
+    53 Broy./Diag. 0.10E+00   15.3     0.00067084     -1316.3743562966 -3.07E-02
+    54 Broy./Diag. 0.10E+00   15.4     0.00045043     -1316.3842550534 -9.90E-03
+    55 Broy./Diag. 0.10E+00   15.2     0.00053761     -1316.4001349065 -1.59E-02
+    56 Broy./Diag. 0.10E+00   15.4     0.00127548     -1316.3999341065  2.01E-04
+    57 Broy./Diag. 0.10E+00   15.4     0.00113848     -1316.3974854413  2.45E-03
+    58 Broy./Diag. 0.10E+00   15.4     0.00085239     -1316.3949092157  2.58E-03
+    59 Broy./Diag. 0.10E+00   15.3     0.00067848     -1316.3933265191  1.58E-03
+    60 Broy./Diag. 0.10E+00   15.2     0.00073749     -1316.3918580763  1.47E-03
+    61 Broy./Diag. 0.10E+00   15.3     0.00035107     -1316.3916173643  2.41E-04
+    62 Broy./Diag. 0.10E+00   15.4     0.00015817     -1316.3916087360  8.63E-06
+    63 Broy./Diag. 0.10E+00   15.3     0.00027834     -1316.3908227590  7.86E-04
+    64 Broy./Diag. 0.10E+00   15.2     0.00002968     -1316.3887997171  2.02E-03
+    65 Broy./Diag. 0.10E+00   15.4     0.00012950     -1316.3894593254 -6.60E-04
+    66 Broy./Diag. 0.10E+00   15.4     0.00005288     -1316.3919056672 -2.45E-03
+    67 Broy./Diag. 0.10E+00   15.3     0.00005610     -1316.3948922687 -2.99E-03
+    68 Broy./Diag. 0.10E+00   15.2     0.00005191     -1316.3977092079 -2.82E-03
+    69 Broy./Diag. 0.10E+00   15.3     0.00002131     -1316.4009330613 -3.22E-03
+    70 Broy./Diag. 0.10E+00   15.3     0.00006235     -1316.4028384234 -1.91E-03
+    71 Broy./Diag. 0.10E+00   15.4     0.00001456     -1316.4055946796 -2.76E-03
+    72 Broy./Diag. 0.10E+00   15.3     0.00000965     -1316.4064605537 -8.66E-04
+    73 Broy./Diag. 0.10E+00   15.2     0.00001484     -1316.4069217579 -4.61E-04
+    74 Broy./Diag. 0.10E+00   15.4     0.00001463     -1316.4070350898 -1.13E-04
+    75 Broy./Diag. 0.10E+00   15.3     0.00000458     -1316.4069803014  5.48E-05
+    76 Broy./Diag. 0.10E+00   15.3     0.00001071     -1316.4066147085  3.66E-04
+    77 Broy./Diag. 0.10E+00   15.3     0.00000643     -1316.4060709043  5.44E-04
+    78 Broy./Diag. 0.10E+00   15.3     0.00000510     -1316.4059786452  9.23E-05
+    79 Broy./Diag. 0.10E+00   15.3     0.00000258     -1316.4059818502 -3.21E-06
+    80 Broy./Diag. 0.10E+00   15.3     0.00000205     -1316.4057869282  1.95E-04
+    81 Broy./Diag. 0.10E+00   15.3     0.00000188     -1316.4055481016  2.39E-04
+    82 Broy./Diag. 0.10E+00   15.3     0.00000177     -1316.4055064509  4.17E-05
+    83 Broy./Diag. 0.10E+00   15.3     0.00000183     -1316.4055337255 -2.73E-05
+    84 Broy./Diag. 0.10E+00   15.3     0.00000085     -1316.4056359121 -1.02E-04
+    85 Broy./Diag. 0.10E+00   15.3     0.00000166     -1316.4057387680 -1.03E-04
+    86 Broy./Diag. 0.10E+00   15.3     0.00000119     -1316.4058372742 -9.85E-05
+    87 Broy./Diag. 0.10E+00   15.3     0.00000079     -1316.4059098690 -7.26E-05
+    88 Broy./Diag. 0.10E+00   15.3     0.00000067     -1316.4059236071 -1.37E-05
+    89 Broy./Diag. 0.10E+00   15.4     0.00000058     -1316.4059181990  5.41E-06
+    90 Broy./Diag. 0.10E+00   15.4     0.00000029     -1316.4059284506 -1.03E-05
+
+  *** SCF run converged in    90 steps ***
+
+
+  Electronic density on regular grids:       -905.0001417780       -0.0001417780
+  Core density on regular grids:              904.9999999992       -0.0000000008
+  Total charge density on r-space grids:       -0.0001417789
+  Total charge density g-space grids:          -0.0001417789
+
+  Overlap energy of the core charge distribution:               0.00003703078023
+  Self energy of the core charge distribution:              -3083.64826578983366
+  Core Hamiltonian energy:                                    971.25666747509899
+  Hartree energy:                                            1189.32312824686005
+  Exchange-correlation energy:                               -392.48966013372899
+  Dispersion energy:                                           -0.84570758719398
+  Electronic entropic energy:                                  -0.00212769254595
+  Fermi energy:                                                -0.05002443809439
+
+  Total energy:                                             -1316.40592845056563
+
+  outer SCF iter =    1 RMS gradient =   0.29E-06 energy =      -1316.4059284506
+  outer SCF loop converged in   1 iterations or   90 steps
+
+
+  Integrated absolute spin density  :                               0.0000378803
+  WARNING: S**2 computation does not yet treat fractional occupied orbitals
+
+ *** WARNING in qs_loc_utils.F:1387 :: User requested the calculation of ***
+ *** the localized wavefunction but the section LOCALIZE was not         ***
+ *** specified. Localization will not be performed!                      ***
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                 BSSE RESULTS                                -
+ -                                                                             -
+ -                 CP-corrected Total energy:    -1316.401212                  -
+ -                                                                             -
+ -                       1-body contribution:    -1269.205829                  -
+ -                       1-body contribution:      -47.159518                  -
+ -                                                                             -
+ -                       2-body contribution:       -0.035865                  -
+ -                 BSSE-free interaction energy:       -0.035865               -
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                    TOTAL       BLAS       SMM       ACC
+ flops     9 x     9 x     8               149040       0.0%    100.0%      0.0%
+ flops     9 x     9 x     9               450522       0.0%    100.0%      0.0%
+ flops     9 x     9 x   136              1982880       0.0%    100.0%      0.0%
+ flops     9 x     9 x   137              1997460       0.0%    100.0%      0.0%
+ flops     9 x     9 x   132              3164832       0.0%    100.0%      0.0%
+ flops     9 x     9 x    32              3576960       0.0%    100.0%      0.0%
+ flops     9 x     9 x   160              8501760       0.0%    100.0%      0.0%
+ flops     9 x     9 x   128             13602816       0.0%    100.0%      0.0%
+ flops     9 x    13 x     8             24111360       0.0%    100.0%      0.0%
+ flops    13 x     9 x     8             24111360       0.0%    100.0%      0.0%
+ flops     9 x    13 x     9             27125280       0.0%    100.0%      0.0%
+ flops    13 x     9 x     9             27125280       0.0%    100.0%      0.0%
+ flops     9 x    13 x   136            320785920       0.0%    100.0%      0.0%
+ flops    13 x     9 x   136            320785920       0.0%    100.0%      0.0%
+ flops     9 x    13 x   137            323144640       0.0%    100.0%      0.0%
+ flops    13 x     9 x   137            323144640       0.0%    100.0%      0.0%
+ flops     9 x    13 x   132            511999488       0.0%    100.0%      0.0%
+ flops    13 x     9 x   132            511999488       0.0%    100.0%      0.0%
+ flops     9 x    13 x    32            578672640       0.0%    100.0%      0.0%
+ flops    13 x     9 x    32            578672640       0.0%    100.0%      0.0%
+ flops     9 x    13 x   160           1375395840       0.0%    100.0%      0.0%
+ flops    13 x     9 x   160           1375395840       0.0%    100.0%      0.0%
+ flops     9 x    13 x   128           2200633344       0.0%    100.0%      0.0%
+ flops    13 x     9 x   128           2200633344       0.0%    100.0%      0.0%
+ flops    13 x    13 x     8           7836192000       0.0%    100.0%      0.0%
+ flops    13 x    13 x     9           8815716000       0.0%    100.0%      0.0%
+ flops    13 x    13 x   136         104255424000       0.0%    100.0%      0.0%
+ flops    13 x    13 x   137         105022008000       0.0%    100.0%      0.0%
+ flops    13 x    13 x    32         188068608000       0.0%    100.0%      0.0%
+ flops    13 x    13 x   132         344042899200       0.0%    100.0%      0.0%
+ flops    13 x    13 x   160         662328576000       0.0%    100.0%      0.0%
+ flops    13 x    13 x   128        1059725721600       0.0%    100.0%      0.0%
+ flops inhomo. stacks                           0       0.0%      0.0%      0.0%
+ flops total                         2.490852E+12       0.0%    100.0%      0.0%
+ flops max/rank                    159.786770E+09       0.0%    100.0%      0.0%
+ matmuls inhomo. stacks                         0       0.0%      0.0%      0.0%
+ matmuls total                           72675194       0.0%    100.0%      0.0%
+ number of processed stacks                109698       0.0%    100.0%      0.0%
+ average stack size                                     0.0     662.5       0.0
+ marketing flops                     3.762333E+12
+ -------------------------------------------------------------------------------
+ # multiplications                            910
+ max memory usage/rank               1.266717E+09
+ # max total images/rank                        1
+ # max 3D layers                                1
+ # MPI messages exchanged                   87360
+ MPI messages size (bytes):
+  total size                        40.788181E+09
+  min size                           0.000000E+00
+  max size                         943.360000E+03
+  average size                     466.897688E+03
+ MPI breakdown and total messages size (bytes):
+             size <=      128               17460                        0
+       128 < size <=     8192                1164                   754272
+      8192 < size <=    32768                   0                        0
+     32768 < size <=   131072                5520                274106640
+    131072 < size <=  4194304               63216              40513273056
+   4194304 < size <= 16777216                   0                        0
+  16777216 < size                               0                        0
+ -------------------------------------------------------------------------------
+
+ MEMORY| Estimated peak process memory [MiB]                                1209
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Group              944
+ MP_Bcast              831                1165090.
+ MP_Allreduce        15034                    479.
+ MP_Sync               218
+ MP_Alltoall         37035                7547835.
+ MP_SendRecv         10920                 491520.
+ MP_ISendRecv        76500                 493761.
+ MP_Wait            145825
+ MP_comm_split         194
+ MP_ISend            33140                1754426.
+ MP_IRecv            33140                1747168.
+ MP_Recv               472                 705672.
+ MP_Memory           70524
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 7.0 (Development Version), the CP2K developers group (2018).
+ CP2K is freely available from https://www.cp2k.org/ .
+
+ Schuett, Ole; Messmer, Peter; Hutter, Juerg; VandeVondele, Joost. 
+ Electronic Structure Calculations on Graphics Processing Units, John Wiley & Sons, Ltd, 173-190 (2016). 
+ GPU-Accelerated Sparse Matrix-Matrix Multiplication for Linear Scaling Density Functional Theory.
+ http://dx.doi.org/10.1002/9781118670712.ch8
+
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ http://dx.doi.org/10.1016/j.parco.2014.03.012
+
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WILEY INTERDISCIPLINARY REVIEWS-COMPUTATIONAL MOLECULAR SCIENCE, 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ http://dx.doi.org/10.1002/wcms.1159
+
+
+ Grimme, S; Ehrlich, S; Goerigk, L. 
+ JOURNAL OF COMPUTATIONAL CHEMISTRY, 32, 1456 (2011). 
+ Effect of the damping function in dispersion corrected density functional theory.
+ http://dx.doi.org/10.1002/jcc.21759
+
+
+ Grimme, S; Antony, J; Ehrlich, S; Krieg, H. 
+ JOURNAL OF CHEMICAL PHYSICS, 132 (15), 154104 (2010). 
+ A consistent and accurate ab initio parametrization of density
+ functional dispersion correction (DFT-D) for the 94 elements H-Pu.
+ http://dx.doi.org/10.1063/1.3382344
+
+
+ VandeVondele, J; Hutter, J. 
+ JOURNAL OF CHEMICAL PHYSICS, 127 (11), 114105 (2007). 
+ Gaussian basis sets for accurate calculations on molecular systems in
+ gas and condensed phases.
+ http://dx.doi.org/10.1063/1.2770708
+
+
+ Krack, M. 
+ THEORETICAL CHEMISTRY ACCOUNTS, 114 (1-3), 145-152 (2005). 
+ Pseudopotentials for H to Kr optimized for gradient-corrected
+ exchange-correlation functionals.
+ http://dx.doi.org/10.1007/s00214-005-0655-y
+
+
+ VandeVondele, J; Krack, M; Mohamed, F; Parrinello, M; Chassaing, T;
+ Hutter, J. COMPUTER PHYSICS COMMUNICATIONS, 167 (2), 103-128 (2005). 
+ QUICKSTEP: Fast and accurate density functional calculations using a
+ mixed Gaussian and plane waves approach.
+ http://dx.doi.org/10.1016/j.cpc.2004.12.014
+
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ http://dx.doi.org/10.1109/JPROC.2004.840301
+
+
+ Hartwigsen, C; Goedecker, S; Hutter, J. 
+ PHYSICAL REVIEW B, 58 (7), 3641-3662 (1998). 
+ Relativistic separable dual-space Gaussian pseudopotentials from H to Rn.
+ http://dx.doi.org/10.1103/PhysRevB.58.3641
+
+
+ Lippert, G; Hutter, J; Parrinello, M. 
+ MOLECULAR PHYSICS, 92 (3), 477-487 (1997). 
+ A hybrid Gaussian and plane wave density functional scheme.
+ http://dx.doi.org/10.1080/002689797170220
+
+
+ Goedecker, S; Teter, M; Hutter, J. 
+ PHYSICAL REVIEW B, 54 (3), 1703-1710 (1996). 
+ Separable dual-space Gaussian pseudopotentials.
+ http://dx.doi.org/10.1103/PhysRevB.54.1703
+
+
+ BECKE, AD. PHYSICAL REVIEW A, 38 (6), 3098-3100 (1988). 
+ DENSITY-FUNCTIONAL EXCHANGE-ENERGY APPROXIMATION WITH CORRECT
+ ASYMPTOTIC-BEHAVIOR.
+ http://dx.doi.org/10.1103/PhysRevA.38.3098
+
+
+ LEE, CT; YANG, WT; PARR, RG. 
+ PHYSICAL REVIEW B, 37 (2), 785-789 (1988). 
+ DEVELOPMENT OF THE COLLE-SALVETTI CORRELATION-ENERGY FORMULA INTO A
+ FUNCTIONAL OF THE ELECTRON-DENSITY.
+ http://dx.doi.org/10.1103/PhysRevB.37.785
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.034    0.079 6001.398 6001.448
+ qs_energies                          5  2.0    0.001    0.001 5998.594 5998.643
+ scf_env_do_scf                       5  3.0    0.001    0.002 5986.631 5987.580
+ scf_env_do_scf_inner_loop          455  4.0    0.029    0.050 5986.630 5987.578
+ qs_ks_update_qs_env                455  5.0    0.004    0.006 2235.818 2236.415
+ rebuild_ks_matrix                  455  6.0    0.002    0.002 2233.975 2234.572
+ qs_ks_build_kohn_sham_matrix       455  7.0    0.072    0.080 2233.973 2234.570
+ qs_rho_update_rho                  460  5.0    0.005    0.006 1779.948 1780.240
+ calculate_rho_elec                 920  6.0 1166.372 1194.995 1779.943 1780.234
+ sum_up_and_integrate               455  8.0    6.774   13.697 1694.423 1695.126
+ integrate_v_rspace                 910  9.0 1190.481 1205.015 1687.646 1690.982
+ gspace_mixing                      449  5.0    2.809    3.064 1005.730 1005.738
+ qs_scf_new_mos                     455  5.0    0.010    0.014  967.226  967.778
+ eigensolver                        910  6.0    0.059    0.072  876.671  881.932
+ broyden_mixing                     449  6.0  547.296  834.439  846.943  848.372
+ cp_fm_syevd                        910  7.0    0.009    0.013  689.902  689.983
+ cp_fm_syevd_base                   910  8.0  689.768  689.843  689.768  689.843
+ pw_transfer                      10508  9.0    0.838    0.983  659.949  675.006
+ fft_wrap_pw1pw2                   9598  9.9    0.093    0.101  652.833  668.687
+ fft_wrap_pw1pw2_150               4108 10.2   73.425  111.292  601.799  630.863
+ density_rs2pw                      920  7.0    0.052    0.059  576.890  612.292
+ rs_pw_transfer                    7325  9.5    0.114    0.148  574.441  604.563
+ fft3d_ps                          9598 11.9  268.793  277.883  481.460  512.052
+ potential_pw2rs                    910 10.0    0.257    0.315  473.502  478.274
+ qs_vxc_create                      455  8.0    0.012    0.014  419.414  423.650
+ xc_vxc_pw_create                   455  9.0   39.438   67.354  419.402  423.637
+ mp_sum_dm                          888  7.0  206.432  384.811  206.432  384.811
+ mp_waitany                       18580 11.5  199.373  338.507  199.373  338.507
+ pw_nn_compose_r                   5460 10.5   90.433  117.749  202.458  259.649
+ xc_rho_set_and_dset_create         455 10.0   35.699   53.803  232.812  258.891
+ rs_pw_transfer_PW2RS_150           910 12.0  113.827  183.484  223.430  244.304
+ rs_pw_transfer_RS2PW_150           925  9.0   93.343  161.694  210.932  238.712
+ mp_sendrecv_dm2                  10920 11.5  112.026  187.367  112.026  187.367
+ cp_fm_triangular_multiply         2730  7.0  175.671  184.810  175.671  184.810
+ mp_waitall_1                    127245 11.6  100.744  158.124  100.744  158.124
+ yz_to_x                           4595 12.6   40.944   46.329   99.770  133.655
+ mp_alltoall_z22v                  9598 13.9   99.148  128.372   99.148  128.372
+ mp_sum_dv                          893  7.0   62.973  122.896   62.973  122.896
+ -------------------------------------------------------------------------------
+
+ The number of warnings for this run is : 7
+ 
+ -------------------------------------------------------------------------------
+  **** **** ******  **  PROGRAM ENDED AT                 2024-08-19 15:49:37.674
+ ***** ** ***  *** **   PROGRAM RAN ON                                sebnode048
+ **    ****   ******    PROGRAM RAN BY                                    luehrs
+ ***** **    ** ** **   PROGRAM PROCESS ID                                346155
+  **** **  *******  **  PROGRAM STOPPED IN /home/luehrs/PhD/Sodium_batteries/Sod
+                                           ium-graphene-interlayer/Zig_Zag_1
